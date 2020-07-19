@@ -1,0 +1,4 @@
+# /etc/services.d/x11vnc/run
+#!/usr/bin/with-contenv bash
+set -e
+exec x11vnc -display "$DISPLAY" -xkb -forever -shared -repeat -listen 0.0.0.0 -rfbauth /home/kali/.vnc/passwd -reopen

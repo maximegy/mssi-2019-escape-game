@@ -1,0 +1,7 @@
+Changement du fichier initial du conteneur par un autre utilisant un mot de passe (utile pour pas que quelqu'un foute la merde et dans le cas d'un dev sur un serveur publique)
+
+Placer le fichier run dans /etc/services.d/x11vnc/run
+chown root:root /etc/services.d/x11vnc/run
+
+Placer le fichier passwd dans /home/kali/.vnc/passwd
+chown kali:kali /home/kali/.vnc/passwd
