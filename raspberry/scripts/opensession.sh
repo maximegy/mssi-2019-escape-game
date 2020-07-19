@@ -1,0 +1,31 @@
+#!/bin/bash
+while true; do
+        clear
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo "                                                                                       #################################################################"
+        echo "                                                                                       #                       __ ATTENTION __                         #"
+        echo "                                                                                       #                                                               #"
+        echo "                                                                                       #             CLE USB D'AUTHENTIFICATION CONNECTEE              #"
+        echo "                                                                                       #                    OUVERTURE DE LA SESSION                    #"
+        echo "                                                                                       #                        EN COURS ...                           #"
+        echo "                                                                                       #                                                               #"
+        echo "                                                                                       #################################################################"
+	sleep 10
+done
