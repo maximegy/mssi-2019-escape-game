@@ -1,14 +1,14 @@
 #!/bin/bash
-unlockedJokeDeviceFile=/home/pi/unlockedJoke.id
-idUnlockJoke=`cat $unlockedJokeDeviceFile`
+DeviceIdFile=/home/pi/Device.id
+DeviceId=`cat $DeviceIdFile`
 
 while true; do
 #echo "ID : "
-#echo $idUnlockJoke
+#echo $DeviceId
 #echo "Grep : "
-#echo `lsusb | grep $idUnlockJoke | wc -l | xargs`
+#echo `lsusb | grep $DeviceId | wc -l | xargs`
 #sleep 10
-if [ `lsusb | grep $idUnlockJoke | wc -l | xargs` == 1 ]; then
+if [ `lsusb | grep $DeviceId | wc -l | xargs` == 1 ]; then
 	clear
         echo ""
         echo ""
