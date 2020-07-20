@@ -32,7 +32,7 @@ function menu_connexiond
 	echo "2: Connexion serveur : [xxx]"
 	echo "3: Connexion serveur : [yyy]"
 	echo
-	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo "q: Quitter cet ecran et revenir au precedent"
 	echo "======================================"
 	echo -n "Faites un choix : "
 	read choix
@@ -43,7 +43,7 @@ function menu_connexiond
 		connexionServeur XXX
 	elif [ "$choix" == "3" ] ; then
 		connexionServeur YYY
-	elif [ "$choix" == "Q" ] ; then
+	elif [ "$choix" == "q" ] ; then
 		$ESCAPE_SRC/m_principal
 	else
 		echo
@@ -65,7 +65,7 @@ function connexionServeur()
 	echo "Attention : "${tan}$(e_flash "Un mot de passe")" est nécéssaire pour cette connexion"
 	user_confirmation "Voulez vous continuer ?"
 	if is_confirmed; then 
-		e_warning "Entrez 'Q' pour quitter cet ecran et revenir au precedent"
+		e_warning "Entrez 'q' pour quitter cet ecran et revenir au precedent"
 		echo
 		motDePasse $1
 	else 

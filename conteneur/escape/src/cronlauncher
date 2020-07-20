@@ -10,25 +10,33 @@
 #+--------------------------------------------------------------------------------+
 #~
 
-srcDir=/home/kali/escape/src
-export ESCAPE_UTIL=/home/kali/escape/res/escape_f_utils
-source $ESCAPE_UTIL
+resize -s 10 40
 
+srcDir=/home/mserment/Documents/mdnotes/perso/escape/scripts/src
+#srcDir=/home/kali/escape/src
+
+export ESCAPE_UTIL=/home/mserment/Documents/mdnotes/perso/escape/scripts/res/escape_f_utils
+#export ESCAPE_UTIL=/home/kali/escape/res/escape_f_utils
+source $ESCAPE_UTIL
 
 while true
 do
 	clear
-	e_header "CRONTAB CHECK -"
-       	echo "date : $(date +%H:%M:%S)"
+	e_header "CRONTAB CHECK"
+    echo "            - $(date +%H:%M:%S) -"
+	echo
 
 	hackerScript=`/bin/ps -fu $USER| grep "boot" | grep -v "grep" | awk '{print $2}'`
-	echo $(e_warning "boot PID : ") ${bold} $hackerScript ${reset}
+	echo "$(e_warning "boot  PID : ") ${bold}$hackerScript ${reset}"
 
 	timerScript=`/bin/ps -fu $USER| grep "timer" | grep -v "grep" | awk '{print $2}'`
-	echo $(e_warning "timer PID : ") ${bold}$timerScript ${reset}
+	echo "$(e_warning "timer PID : ") ${bold}$timerScript ${reset}"
 
 	chatScript=`/bin/ps -fu $USER| grep "chat" | grep -v "grep" | awk '{print $2}'`
-	echo $(e_warning "chat PID : ") ${bold}$chatScript ${reset}
+	echo "$(e_warning "chat  PID : ") ${bold}$chatScript ${reset}"
+	echo;echo
+	echo "${bold}=====================================${reset}"
+
 
 
 	if [ -e $hackerScript ]; then 
@@ -48,7 +56,5 @@ do
 		#bash -c "gnome-terminal -- $srcDir/timer" & 
 	bash -c "xfce4-terminal --geometry 60x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
 	fi
-
-
 	sleep 1
 done

@@ -37,13 +37,13 @@ export ESCAPE_SLEEPTIME_L=5
 # Variables
 #
 
-DEBUG=ON
+export ESCAPE_DEBUG=ON
 
 # 
 # Blocage des actions d'interuptions du shell si DEBUG OFF
 # 
 
-if [ "$DEBUG" == "OFF"} ]; then 
+if [ "$ESCAPE_DEBUG" == "OFF" ]; then 
 	trap '' INT TSTP # Ctrl C / Ctrl Z
 	stty -ixon # Ctrl Q
 	stty -ixoff # Ctrl S

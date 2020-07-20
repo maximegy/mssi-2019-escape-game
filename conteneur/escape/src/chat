@@ -19,7 +19,7 @@ function main()
 function init()
 {
 	e_header "CHAT / AIDE"
-	echo $(e_warning2 "") "Tapez '?' puis 'ENTRER' avant de poser une question" 
+	echo $(e_warning2 "") "Tapez ${bold}'?'${reset} puis 'ENTRER' puis posez votre question" 
 	echo
 	echo $(tty) > /tmp/TTY_JOUEURS
 	bash

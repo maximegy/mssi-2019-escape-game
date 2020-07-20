@@ -33,25 +33,27 @@ function menu_admin()
 
 	echo ""
 	echo "1: Lancer la simulation"
-	echo "2: Reprise de la simulation"
+	#echo "2: Reprise de la simulation"
 	echo ""
-	echo "I: Inspect"
-	echo "R: Restart admin menu"
-	echo
-	echo "K: KILL ALL SCRIPTS !"
+	echo "I: Verifier les fichiers"
+	echo "R: Relancer le menu admin"
+	echo "C: Lance le Cronlauncher"
+	echo "K: Kill tous les scripts"
 	echo 
-	echo "Q: Quit"
+	echo "Q: Quitter"
 	echo "=================================="
-	echo "DEBUG IS "[${flashred}${bold}$DEBUG${reset}]
+	echo "DEBUG MODE EST "[${flashred}${bold}$ESCAPE_DEBUG${reset}]
 	echo "=================================="
 	echo -n "Faites un choix : "
 	read choix
 	
 	if [ "$choix" == "1" ] ; then
 		lancement_simulation
+		menu_admin
 
-	elif [ "$choix" == "2" ] ; then
-		reprise_simulation
+	#elif [ "$choix" == "2" ] ; then
+    #	reprise_simulation
+    #	menu_admin
 
 	#DEBUG BYPASS HIDDEN FUNCTIONS
 	elif [ "$choix" == "m_principal" ] ; then
@@ -75,16 +77,23 @@ function menu_admin()
 	#DEBUG ONLY
 	elif [ "$choix" == "I" ] ; then
 		validation_donnees
-		
+			
 	elif [ "$choix" == "R" ] ; then
 		e_warning2 "Restarting ..."
-		sleep 1
+		sleep 0.5
 		source $0
 		
 	elif [ "$choix" == "K" ] ; then
 		e_warning2 "Kill all processes ..."
 		pkill timer; pkill boot; pkill chat
+		pkill cronlauncher
 		e_success "OK"
+		menu_admin
+
+	elif [ "$choix" == "C" ] ; then
+		e_warning2 "launching cronlauncher ..."
+		sleep 0.5
+		bash -c "xfce4-terminal --geometry +950+300 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CRONLAUNCHER\" -x $ESCAPE_SRC/cronlauncher" & 
 		menu_admin
 
 	elif [ "$choix" == "Q" ] ; then
@@ -124,7 +133,7 @@ function lancement_simulation
 		e_warning "Lancement de la simulation ..."
 		sleep $ESCAPE_SLEEPTIME_L
 
-		lancement_timer
+		#lancement_timer
 
 		#reset timer
 		if [ -f $ESCAPE_TMP/timer.tmp ] ; then
@@ -135,12 +144,17 @@ function lancement_simulation
 		#echo $currentTimerPID
 		#kill $currentTimerPID
 
-		lancement_timer &
+		#lancement_timer &
 		#$ESCAPE_SRC/boot
 		
 		# Lancement du boot 
-		bash -c "xfce4-terminal --geometry +0+0 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"HACKER PC\" -x $ESCAPE_SRC/boot" & 
-		quitter 
+		bootScript=`/bin/ps -fu $USER| grep "boot" | grep -v "grep" | awk '{print $2}'`
+		if [ "$bootScript" == "" ]; then
+			bash -c "xfce4-terminal --geometry +0+0 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"HACKER PC\" -x $ESCAPE_SRC/boot" & 
+		fi
+
+		#quitter 
+		menu_admin
 		
 	else
 		e_warning "Retour au menu ..."
@@ -161,7 +175,7 @@ function reprise_simulation()
 	fi
 	e_warning "Reprise de la simulation ..."	
 	sleep $ESCAPE_SLEEPTIME_M
-	lancement_timer &
+	#lancement_timer &
 	$ESCAPE_SRC/m_principal
 	
 }
@@ -193,6 +207,8 @@ function validation_donnees
 	valPath=$ESCAPE_SRC/m_code; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
 	valPath=$ESCAPE_SRC/boot; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
 	valPath=$ESCAPE_SRC/timer; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+	valPath=$ESCAPE_SRC/cronlauncher; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+	valPath=$ESCAPE_SRC/chat; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
 	echo
 	
 	#Fichiers ressources 
@@ -238,7 +254,6 @@ function validation_donnees
 function quitter
 {
 	#kill $timerPID
-	pkill timer; pkill chat; pkill boot
 	echo -n "Fin du script launcher" 
 	sleep 2
 	for i in {0..2}; do echo -n "." ; sleep $ESCAPE_SLEEPTIME_S; done

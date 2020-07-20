@@ -72,8 +72,7 @@ function lancement_timer()
 	e_warning2 "timer is up !"
 	echo "current date is : " $current
 	echo "end date is     : " $fin
-	sleep 10
-	exit
+	read
 }
 
 # Ecriture des valeurs de debut et de fin dans un fichier

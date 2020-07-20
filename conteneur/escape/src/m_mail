@@ -28,7 +28,7 @@ function menu_mail()
 	echo "1: Boite de reception"
 	echo "2: Boite d'envois"
 	echo
-	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo "q: Quitter cet ecran et revenir au precedent"
 	echo "======================================"
 	echo -n "Faites un choix : "
 	read choix
@@ -37,7 +37,7 @@ function menu_mail()
 		menu_reception
 	elif [ "$choix" == "2" ] ; then
 		menu_envois
-	elif [ "$choix" == "Q" ] ; then
+	elif [ "$choix" == "q" ] ; then
 		$ESCAPE_SRC/m_principal
 	else
 		echo
@@ -56,7 +56,7 @@ function menu_reception()
 	cat $listeMail_reception
 	echo "==========================================="
 	echo
-	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo "q: Quitter cet ecran et revenir au precedent"
 	echo
 	echo -n "Faites un choix : "
 	read choix
@@ -72,7 +72,7 @@ function menu_reception()
 	elif [ "$choix" == "5" ] ; then
 		affichageMail_reception 5
 	
-	elif [ "$choix" == "Q" ] ; then
+	elif [ "$choix" == "q" ] ; then
 		menu_mail
 
 	else
@@ -134,7 +134,7 @@ function menu_envois()
 	cat $listeMail_envois
 	echo "==========================================="
 	echo
-	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo "q: Quitter cet ecran et revenir au precedent"
 	echo
 	echo -n "Faites un choix : "
 	read choix
@@ -150,7 +150,7 @@ function menu_envois()
 	elif [ "$choix" == "5" ] ; then
 		affichageMail_envois 5
 	
-	elif [ "$choix" == "Q" ] ; then
+	elif [ "$choix" == "q" ] ; then
 		menu_mail
 
 	else

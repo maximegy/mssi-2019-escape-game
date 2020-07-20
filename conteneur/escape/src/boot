@@ -87,7 +87,7 @@ function demarage_poste()
 	# Lancement du Chat 
 	chatScript=`/bin/ps -fu $USER| grep "chat" | grep -v "grep" | awk '{print $2}'`
 	if [ "$chatScript" == "" ]; then
-		bash -c "xfce4-terminal --geometry 60x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
+		bash -c "xfce4-terminal --geometry 83x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
 	fi
 
 	$ESCAPE_SRC/m_principal

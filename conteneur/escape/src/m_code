@@ -26,7 +26,7 @@ function menu_code()
 	clear
 	e_header "MENU CODE"
 
-	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo "q: Quitter cet ecran et revenir au precedent"
 	echo
 	echo -n  $(e_warning2 "Entrez un code : " ) 
 	read code
@@ -39,7 +39,7 @@ function menu_code()
 		e_success "code2"
 		sleep $ESCAPE_SLEEPTIME_M
 		menu_code
-	elif [ "$code" == "Q" ] ; then
+	elif [ "$code" == "q" ] ; then
 		$ESCAPE_SRC/m_principal
 	else
 		echo

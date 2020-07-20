@@ -26,7 +26,7 @@ function menu_journal()
 	cat $listeJournaux
 	echo "================================="
 	echo
-	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo "q: Quitter cet ecran et revenir au precedent"
 	echo
 	echo -n "Faites un choix : "
 	read choix
@@ -42,7 +42,7 @@ function menu_journal()
 	elif [ "$choix" == "5" ] ; then
 		affichagePage 4
 	
-	elif [ "$choix" == "Q" ] ; then
+	elif [ "$choix" == "q" ] ; then
 		$ESCAPE_SRC/m_principal
 
 	else
