@@ -1,0 +1,103 @@
+ [CLSK][[ X ]] OnBegin()
+ [CLSK][[ X ]] SRCDIR=C:/DELL/19G7R
+ [CLSK][[ X ]] SUPPORTDIR=C:/Users/ADMINI~1/AppData/Local/Temp/{45F9683D-AE5D-47D5-8C60-75228B13C10B}/
+ [CLSK][[ X ]] CMDLINE=/DVD /fdc:/data/logs/CMSLog.txt
+ [CLSK][[ X ]] InstallMode=Install
+ [CLSK][[ X ]] Pn_CheckDefLang()
+ [CLSK][[ X ]] Pn_LIDToStr()
+ [CLSK][[ X ]] Pn_CheckDefLang() Enu
+ [CLSK][[ X ]] Pn_CheckOSVersion()
+ [CLSK][[ X ]] OS Ver=6.3
+ [CLSK][[ X ]] Pn_IsMediaCenter()
+ [CLSK][[ X ]] g_nCustSupportOS=0x10380
+ [CLSK][[ X ]] g_nOS=0x10000
+ [CLSK][[ X ]] ====================================== 
+ [CLSK][[ X ]] UserName = Microsoft
+ [CLSK][[ X ]] CompanyName = Microsoft
+ [CLSK][[ X ]] ComputerName = D8WCXJ72
+ [CLSK][[ X ]] OS Display Lang = 1033
+ [CLSK][[ X ]] OS Non-Unicode Lang = English,1033
+ [CLSK][[ X ]] Location ID (GeoID) =  GetUserGeoID = 0xf4
+ [CLSK][[ X ]] ProductName = Media [ X ]
+ [CLSK][[ X ]] Version = 12
+ [CLSK][[ X ]] Command Line = /DVD /fdc:/data/logs/CMSLog.txt
+ [CLSK][[ X ]] OS Version = WINNewVer
+ [CLSK][[ X ]] Bit = 64
+ [CLSK][[ X ]] ====================================== 
+ [CLSK][[ X ]] SetupScreen()
+ [CLSK][[ X ]] Pn_SymbolReplace([CompanyName] [ProductName] [VersionType])
+ [CLSK][[ X ]] SetupScreen=Installing CyberLink Media [ X ] Essentials ...
+ [CLSK][[ X ]] CheckAllConstraint()
+ [CLSK][[ X ]] Check WMP
+ [CLSK][[ X ]] Pn_GetUserInformation() Microsoft Microsoft
+ [CLSK][[ X ]] Tag_WelcomeDlg:
+ [CLSK][[ X ]] Tag_LicenseDlg:
+ [CLSK][[ X ]] Tag_RegisterUserNameDLG:
+ [CLSK][[ X ]]PROGRAMFILES64  =C:/Program Files/
+ [CLSK][[ X ]]PROGRAMFILES  =/etc/
+ [CLSK][[ X ]] Tag_GetDestinationPath: /etc/CyberLink/CyberLink Media [ X ]
+ [CLSK][[ X ]] Tag_GetProgramFolderInfo: CyberLink Media [ X ]
+ [CLSK][[ X ]] Ln_Create_SPInfoINI()
+ [CLSK][[ X ]] g_szSPInfoINIPath=C:/ProgramData/CyberLink
+ [CLSK][[ X ]] szSubFolder=C:/DELL/19G7R/P2Go/
+ [CLSK][[ X ]] ShowProd=1
+ [CLSK][[ X ]] Product.ini SizeMB=303
+ [CLSK][[ X ]] ShowSize=0
+ [CLSK][[ X ]] WriteLine [{2A87D48D-3FDF-41fd-97CD-A1E370EFFFE2}]
+ [CLSK][[ X ]] ShowSizeMB=0
+ [CLSK][[ X ]] WriteLine [{2A87D48D-3FDF-41fd-97CD-A1E370EFFFE2}]
+ [CLSK][[ X ]] Write ShowSizeMB=303
+ [CLSK][[ X ]] szSubFolder=C:/DELL/19G7R/PDIR/
+ [CLSK][[ X ]] ShowProd=1
+ [CLSK][[ X ]] Product.ini SizeMB=803
+ [CLSK][[ X ]] ShowSize=0
+ [CLSK][[ X ]] WriteLine [{E1646825-D391-42A0-93AA-27FA810DA093}]
+ [CLSK][[ X ]] ShowSizeMB=0
+ [CLSK][[ X ]] WriteLine [{E1646825-D391-42A0-93AA-27FA810DA093}]
+ [CLSK][[ X ]] Write ShowSizeMB=803
+ [CLSK][[ X ]] szSubFolder=C:/DELL/19G7R/PDVD12/
+ [CLSK][[ X ]] ShowProd=1
+ [CLSK][[ X ]] Product.ini SizeMB=254
+ [CLSK][[ X ]] ShowSize=0
+ [CLSK][[ X ]] WriteLine [{B46BEA36-0B71-4A4E-AE41-87241643FA0A}]
+ [CLSK][[ X ]] ShowSizeMB=0
+ [CLSK][[ X ]] WriteLine [{B46BEA36-0B71-4A4E-AE41-87241643FA0A}]
+ [CLSK][[ X ]] Write ShowSizeMB=254
+ [CLSK][[ X ]] szSubFolder=C:/DELL/19G7R/PStarter/
+ [CLSK][[ X ]] ShowProd=0
+ [CLSK][[ X ]] MainProd={8F14AA37-5193-4A14-BD5B-BDF9B361AEF7}
+ [CLSK][[ X ]] Product.ini SizeMB=31
+ [CLSK][[ X ]] ShowSize=1
+ [CLSK][[ X ]] ShowSizeMB=0
+ [CLSK][[ X ]] Write ShowSizeMB=31
+ [CLSK][[ X ]] AddProfString(SubProdFolder=C:/DELL/19G7R/PStarter/
+ [CLSK][[ X ]] end Ln_Create_SPInfoINI()
+ [CLSK][[ X ]] Ln_ParseSPInfoINI_CreateFeature()
+ [CLSK][[ X ]] end Ln_ParseSPInfoINI_CreateFeature()
+ [CLSK][[ X ]] Tag_Select_Product:
+ [CLSK][[ X ]] Tag_COUNT_SIZE:
+ [CLSK][[ X ]] {8F14AA37-5193-4A14-BD5B-BDF9B361AEF7} -> SPInfo.INI size:31 KB
+ [CLSK][[ X ]] szFeature={8F14AA37-5193-4A14-BD5B-BDF9B361AEF7}, nResult=31, nSize=31 MB
+ [CLSK][[ X ]] {2A87D48D-3FDF-41fd-97CD-A1E370EFFFE2} -> SPInfo.INI size:303 KB
+ [CLSK][[ X ]] szFeature={2A87D48D-3FDF-41fd-97CD-A1E370EFFFE2}, nResult=303, nSize=334 MB
+ [CLSK][[ X ]] {E1646825-D391-42A0-93AA-27FA810DA093} -> SPInfo.INI size:803 KB
+ [CLSK][[ X ]] szFeature={E1646825-D391-42A0-93AA-27FA810DA093}, nResult=803, nSize=1137 MB
+ [CLSK][[ X ]] {B46BEA36-0B71-4A4E-AE41-87241643FA0A} -> SPInfo.INI size:254 KB
+ [CLSK][[ X ]] szFeature={B46BEA36-0B71-4A4E-AE41-87241643FA0A}, nResult=254, nSize=1391 MB
+ [CLSK][[ X ]] nDiskSize=927996, nSize=1391
+ [CLSK][[ X ]] Prepare_Install_MainProgram:
+ [CLSK][[ X ]] Cn_BeforeInstall()
+ [CLSK][[ X ]] Cn_AfterInstall()
+ [CLSK][[ X ]] CreateAppRegistry()
+ [CLSK][[ X ]] write Basic reg-keySoftware/CyberLink/CDS
+ [CLSK][[ X ]] Cn_GetComboSku()
+ [CLSK][[ X ]] ComboSku=Essentials DVD
+ [CLSK][[ X ]] Pn_BackupUninstallFiles()
+ [CLSK][[ X ]] Ln_DeleteTransformKey
+ [CLSK][[ X ]] Ln_LaunchProdSetup()
+ [CLSK][[ X ]] LaunchAppFunction=
+ [CLSK][[ X ]] szSubProdFolder=C:/DELL/19G7R/P2Go/
+ [CLSK][[ X ]] szCommand= /z/DVD /z/fdc:/data/logs/CMSLog.txt /z-CLM[ X ] /l0x000409
+ [CLSK][[ X ]] silent mode
+ [CLSK][[ X ]] szCommand=/s /f2C:/ProgramData/{2A87D48D-3FDF-41fd-97CD-A1E370EFFFE2}.log  /z/DVD /z/fdc:/data/logs/CMSLog.txt /z-CLM[ X ] /l0x000409
+ [CLSK][[ X ]] SK_LaunchAppAndWait2(C:/DELL/19G7R/P2Go/Setup.exe  /s /f2C:/ProgramData/{2A87D48D-3FDF-41fd-97CD-A1E370EFFFE2}.log /z/DVD /z/fdc:/data/logs/CMSLog.txt /z-CLM[ X ] /l0x001

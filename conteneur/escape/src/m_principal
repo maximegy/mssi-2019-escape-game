@@ -1,0 +1,74 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script du menu principal du poste de la hackeuse                 |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+function main()
+{
+	menu_principal
+}
+
+# Menu principal du script
+function menu_principal()
+{
+	clear
+	e_header "MENU PRINCIPAL"
+
+	echo ""
+	echo "1 : Voir la boite mail"
+	echo "2 : Voir le fichier du récupérateur de données [maltego]"
+	echo "3 : Voir les pages du journal"
+	echo "4 : Voir les connexions a distance"
+	echo "5 : Débloquage de fonctionalités cachées"
+	echo ""
+	echo "======================================"
+	echo -n "Faites un choix : "
+	read choix
+	
+	if [ "$choix" == "1" ] ; then
+		menu_mail
+	elif [ "$choix" == "2" ] ; then
+		menu_maltego
+	elif [ "$choix" == "3" ] ; then
+		menu_journal
+	elif [ "$choix" == "4" ] ; then
+		menu_connexion
+	elif [ "$choix" == "5" ] ; then
+		menu_code
+	else
+		echo
+		echo -n $(e_warning "Veuillez selectionner un des choix du menu ")
+		sleep $ESCAPE_SLEEPTIME_M
+		menu_principal
+	fi
+}
+
+function menu_mail
+{
+	$ESCAPE_SRC/m_mail
+}
+
+function menu_maltego
+{
+	$ESCAPE_SRC/m_maltego
+}
+function menu_journal
+{
+	$ESCAPE_SRC/m_journal
+}
+function menu_connexion
+{
+	$ESCAPE_SRC/m_connexiond
+}
+function menu_code
+{
+	$ESCAPE_SRC/m_code
+}
+main

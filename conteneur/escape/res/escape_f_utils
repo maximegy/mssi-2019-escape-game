@@ -1,0 +1,145 @@
+#!bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script avec des fonctions commune ou utiltaire pour l'escape     |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+
+
+#
+# Constantes
+#
+
+currentPath=$(pwd)
+export ESCAPE_PATH=$currentPath
+
+settingsDir=$currentPath/res
+settingsFileName=settings.ini
+export ESCAPE_SETTINGS=$settingsDir/$settingsFileName
+
+srcDir=$currentPath/src
+export ESCAPE_SRC=$srcDir
+
+resDir=$currentPath/res
+export ESCAPE_RES=$resDir
+
+tmpDir=$currentPath/tmp
+export ESCAPE_TMP=$tmpDir
+
+export ESCAPE_SLEEPTIME_S=0.1
+export ESCAPE_SLEEPTIME_M=2
+export ESCAPE_SLEEPTIME_L=5
+
+
+#
+# Variables
+#
+
+DEBUG=ON
+
+# 
+# Blocage des actions d'interuptions du shell si DEBUG OFF
+# 
+
+if [ "$DEBUG" == "OFF"} ]; then 
+	trap '' INT TSTP # Ctrl C / Ctrl Z
+	stty -ixon # Ctrl Q
+	stty -ixoff # Ctrl S
+fi
+
+#
+# Couleurs
+#
+
+bold=$(tput bold)
+underline=$(tput sgr 0 1)
+reset=$(tput sgr0)
+
+flashred=$(tput blink) 
+purple=$(tput setaf 171)
+red=$(tput setaf 1)
+green=$(tput setaf 46)
+blue=$(tput setaf 016)
+lightblue=$(tput setaf 38)
+tan=$(tput setaf 3)
+
+#
+# Mise en page et Affichage
+#
+
+e_header() { printf "${bold}==========  %s  ==========\n${reset}" "$@";}
+e_header2() { printf "${bold}-----  %s  -----\n${reset}" "$@";}
+e_header3() { printf "${bold}--  %s  --\n${reset}" "$@";}
+e_arrow() { printf "➜ $@\n";}
+e_success() { printf "${green}%s${reset}\n" "$@";}
+e_success2() { printf "${green}✔ %s${reset}\n" "$@";}
+e_error() { printf "${red}%s${reset}\n" "$@";}
+e_error2() { printf "${red}✖ %s${reset}\n" "$@";}
+e_warning() { printf "${tan}%s${reset}\n" "$@";}
+e_warning2() { printf "${tan}➜ %s${reset}\n" "$@";}
+e_underline() { printf "${underline}${bold}%s${reset}\n" "$@";}
+e_bold() { printf "${bold}%s${reset}\n" "$@";}
+e_note() { printf "${underline}${bold}${lightblue}Note:${reset} ${lightblue}%s${reset}\n" "$@";}
+e_flash() { printf "${flashred}%s${reset}\n" "$@";}
+
+
+#
+# Question a l'utilisateur et confirmation 
+#
+
+# Question utilisateur de type Oui/Non
+user_confirmation() 
+{
+	printf "\n$@${reset}"
+	read -p " (o/n) " -n 1
+	printf "\n"
+}
+
+user_wait_input() 
+{
+	printf "\n${bold}$@${reset}"
+	read
+	printf "\n"
+}
+# Test pour savoir si le retour d'une user_confirmation est YES 
+is_confirmed() 
+{
+	if [[ "$REPLY" =~ ^[Oo]$ ]]; then
+ 		return 0
+	fi
+	return 1
+}
+
+
+#
+# Validation des données et lecture dans le fichier settings
+#
+
+read_settings()
+{
+	value=$1
+	file=$ESCAPE_SETTINGS
+	#currentVal=$(awk -F "=" '/'$1'/ {print $2}' $file)
+	echo $(awk -F "=" '/'$1'/ {print $2}' $file)
+}
+
+
+#
+# Simulation de chargement
+#
+
+
+# Affiche une "roue" ASCII qui tourne 
+chargement()
+{
+	chars="/-\|"
+	while :; do
+	  for (( i=0; i<${#chars}; i++ )); do
+		sleep 0.2 
+		echo -en "${chars:$i:1}" "\r"
+	  done
+	done
+
+}

@@ -1,0 +1,165 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de simulation d'une boite mail                            |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+listeMail_reception=$ESCAPE_RES/mail_reception_list.txt
+listeMail_envois=$ESCAPE_RES/mail_envois_list.txt
+
+
+function main()
+{
+	#e_warning2 "lancement de l'interface de mail "
+	#sleep $ESCAPE_SLEEPTIME_M 
+	menu_mail
+}
+
+function menu_mail()
+{
+	clear
+	e_header "BOITE MAIL"
+	echo "1: Boite de reception"
+	echo "2: Boite d'envois"
+	echo
+	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo "======================================"
+	echo -n "Faites un choix : "
+	read choix
+	
+	if [ "$choix" == "1" ] ; then
+		menu_reception
+	elif [ "$choix" == "2" ] ; then
+		menu_envois
+	elif [ "$choix" == "Q" ] ; then
+		$ESCAPE_SRC/m_principal
+	else
+		echo
+		echo -n $(e_warning "Veuillez selectionner un des choix du menu ")
+		sleep $ESCAPE_SLEEPTIME_M
+		menu_mail
+	fi
+
+}
+
+function menu_reception()
+{
+	clear
+	e_header "BOITE DE RECEPTION"
+	# Affiche une liste de mail 
+	cat $listeMail_reception
+	echo "==========================================="
+	echo
+	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo
+	echo -n "Faites un choix : "
+	read choix
+	
+	if [ "$choix" == "1" ] ; then
+		affichageMail_reception 1
+	elif [ "$choix" == "2" ] ; then
+		affichageMail_reception 2
+	elif [ "$choix" == "3" ] ; then
+		affichageMail_reception 3
+	elif [ "$choix" == "4" ] ; then
+		affichageMail_reception 4
+	elif [ "$choix" == "5" ] ; then
+		affichageMail_reception 5
+	
+	elif [ "$choix" == "Q" ] ; then
+		menu_mail
+
+	else
+		echo
+		echo -n $(e_warning "Veuillez selectionner un des choix du menu. [chiffre de 1 a 5]")
+		sleep $ESCAPE_SLEEPTIME_M
+		menu_reception
+	fi
+}
+
+function affichageMail_reception()
+{
+	numero=$1 #numero du mail a afficher
+
+	clear
+	e_header "AFFICHAGE DU MAIL #$numero"
+
+	# Affiche le mail 
+	if [ $numero == "1" ]; then nomFichier=$ESCAPE_RES/mail_reception_1.txt; fi
+	if [ $numero == "2" ]; then nomFichier=$ESCAPE_RES/mail_reception_2.txt; fi
+	if [ $numero == "3" ]; then nomFichier=$ESCAPE_RES/mail_reception_3.txt; fi
+	if [ $numero == "4" ]; then nomFichier=$ESCAPE_RES/mail_reception_4.txt; fi
+	if [ $numero == "5" ]; then nomFichier=$ESCAPE_RES/mail_reception_5.txt; fi
+
+	cat $nomFichier
+	echo "==========================================="
+	echo
+	user_wait_input "Appuyez sur une touche pour revenir au menu precedent"; if is_confirmed; then menu_reception; fi 
+	menu_reception
+}
+
+function affichageMail_envois()
+{
+	numero=$1 #numero du mail a afficher
+
+	clear
+	e_header "AFFICHAGE DU MAIL #$numero"
+
+	# Affiche le mail 
+	if [ $numero == "1" ]; then nomFichier=$ESCAPE_RES/mail_envois_1.txt; fi
+	if [ $numero == "2" ]; then nomFichier=$ESCAPE_RES/mail_envois_2.txt; fi
+	if [ $numero == "3" ]; then nomFichier=$ESCAPE_RES/mail_envois_3.txt; fi
+	if [ $numero == "4" ]; then nomFichier=$ESCAPE_RES/mail_envois_4.txt; fi
+	if [ $numero == "5" ]; then nomFichier=$ESCAPE_RES/mail_envois_5.txt; fi
+
+	cat $nomFichier
+	echo "==========================================="
+	echo
+	user_wait_input "Appuyez sur une touche pour revenir au menu precedent"; if is_confirmed; then menu_reception; fi 
+	menu_envois
+}
+
+
+function menu_envois()
+{
+	clear
+	e_header "BOITE D'ENVOIS"
+	# Affiche une liste de mail 
+	cat $listeMail_envois
+	echo "==========================================="
+	echo
+	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo
+	echo -n "Faites un choix : "
+	read choix
+	
+	if [ "$choix" == "1" ] ; then
+		affichageMail_envois 1
+	elif [ "$choix" == "2" ] ; then
+		affichageMail_envois 2
+	elif [ "$choix" == "3" ] ; then
+		affichageMail_envois 3
+	elif [ "$choix" == "4" ] ; then
+		affichageMail_envois 4
+	elif [ "$choix" == "5" ] ; then
+		affichageMail_envois 5
+	
+	elif [ "$choix" == "Q" ] ; then
+		menu_mail
+
+	else
+		echo
+		echo -n $(e_warning "Veuillez selectionner un des choix du menu. [chiffre de 1 a 5]")
+		sleep $ESCAPE_SLEEPTIME_M
+		menu_envois
+	fi
+
+}
+
+main

@@ -1,0 +1,249 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de lancement pour les scripts de la hackeuse              |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+currentTimerPID=
+
+function main()
+{
+	clear
+	init
+	menu_admin
+}
+
+function init()
+{
+	currentPath=$(pwd)
+	# Recuperation du script utilitaire	
+	export ESCAPE_UTIL=$currentPath/res/escape_f_utils
+	source $ESCAPE_UTIL
+}
+
+# Vérifie l'existence des scripts et le renseignements des variables d'environement
+function menu_admin()
+{
+	clear
+	e_header "MENU ADMIN"
+
+	echo ""
+	echo "1: Lancer la simulation"
+	echo "2: Reprise de la simulation"
+	echo ""
+	echo "I: Inspect"
+	echo "R: Restart admin menu"
+	echo
+	echo "K: KILL ALL SCRIPTS !"
+	echo 
+	echo "Q: Quit"
+	echo "=================================="
+	echo "DEBUG IS "[${flashred}${bold}$DEBUG${reset}]
+	echo "=================================="
+	echo -n "Faites un choix : "
+	read choix
+	
+	if [ "$choix" == "1" ] ; then
+		lancement_simulation
+
+	elif [ "$choix" == "2" ] ; then
+		reprise_simulation
+
+	#DEBUG BYPASS HIDDEN FUNCTIONS
+	elif [ "$choix" == "m_principal" ] ; then
+		$ESCAPE_SRC/m_principal
+	elif [ "$choix" == "m_mail" ] ; then
+		$ESCAPE_SRC/m_mail
+	elif [ "$choix" == "m_connexiond" ] ; then
+		$ESCAPE_SRC/m_connexiond
+	elif [ "$choix" == "m_journal" ] ; then
+		$ESCAPE_SRC/m_journal
+	elif [ "$choix" == "m_maltego" ] ; then
+		$ESCAPE_SRC/m_maltego
+	elif [ "$choix" == "m_mdp" ] ; then
+		$ESCAPE_SRC/m_mdp
+	elif [ "$choix" == "timer" ] ; then
+		lancement_timer
+	elif [ "$choix" == "code" ] ; then
+		$ESCAPE_SRC/m_code
+	#elif [ "$choix" == "m_mdp" ] ; then
+
+	#DEBUG ONLY
+	elif [ "$choix" == "I" ] ; then
+		validation_donnees
+		
+	elif [ "$choix" == "R" ] ; then
+		e_warning2 "Restarting ..."
+		sleep 1
+		source $0
+		
+	elif [ "$choix" == "K" ] ; then
+		e_warning2 "Kill all processes ..."
+		pkill timer; pkill boot; pkill chat
+		e_success "OK"
+		menu_admin
+
+	elif [ "$choix" == "Q" ] ; then
+		quitter 
+	else
+		echo
+		echo -n $(e_warning "Veuillez selectionner un des choix du menu ")
+		sleep 1
+		menu_admin
+	fi
+}
+
+function lancement_timer()
+{
+	currentTimerPID=`/bin/ps -fu $USER| grep "timer" | grep -v "grep" | awk '{print $2}'`
+	#echo $currentTimerPID
+
+	if [ "$currentTimerPID" == "" ] ; then # si le timer n'est deja lancé 
+		#bash -c "xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar --title=TIMER -x $ESCAPE_SRC/timer" & 
+		#bash -c 'gnome-terminal --geometry -200+0 -- $ESCAPE_SRC/timer' & 
+		currentTimerPID=$(echo $!)
+	fi
+	
+}
+
+function lancement_simulation
+{
+	echo
+	e_warning "ATTENTION : Le timer va être réinitialiser !"
+	user_confirmation "Voulez vous vraiment lancer la simulation ?"
+	if is_confirmed; then 
+		
+		# Test de la variable DEBUG dans le fichier setting
+		#currentVal=$(read_settings "DEBUG")
+		#if [ "$currentVal" == "ON" ]; then export DEBUG=ON; else export DEBUG=OFF;fi
+
+		e_warning "Lancement de la simulation ..."
+		sleep $ESCAPE_SLEEPTIME_L
+
+		lancement_timer
+
+		#reset timer
+		if [ -f $ESCAPE_TMP/timer.tmp ] ; then
+			rm -rf $ESCAPE_TMP/timer.tmp
+		fi
+
+		#kill timer if any
+		#echo $currentTimerPID
+		#kill $currentTimerPID
+
+		lancement_timer &
+		#$ESCAPE_SRC/boot
+		
+		# Lancement du boot 
+		bash -c "xfce4-terminal --geometry +0+0 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"HACKER PC\" -x $ESCAPE_SRC/boot" & 
+		quitter 
+		
+	else
+		e_warning "Retour au menu ..."
+		sleep $ESCAPE_SLEEPTIME_M
+		menu_admin
+	fi
+}
+
+
+function reprise_simulation()
+{
+	if [ ! -f $ESCAPE_TMP/timer.tmp ] ; then
+		echo
+		e_error "Erreur : Aucune simulation n'est en cours ..."
+		e_warning "Veuillez lancer une simulation depuis le menu [CHOIX :1]"
+		
+		user_wait_input "Appuyez sur [ENTRER] pour revenir au menu"; if is_confirmed; then menu_admin; else menu_admin; fi; 
+	fi
+	e_warning "Reprise de la simulation ..."	
+	sleep $ESCAPE_SLEEPTIME_M
+	lancement_timer &
+	$ESCAPE_SRC/m_principal
+	
+}
+
+
+function validation_donnees
+{
+	clear
+	echo "Validation des données ..."
+	echo
+	
+	#Constantes
+	echo -e '\033[1m==========  Constantes   ==========\033[0m'
+	if [ ! -e ${ESCAPE_UTIL} ]; then echo "ESCAPE_UTIL is unset or incorrect "; echo "This is an Important error please fix !"; echo "actual value : $ESCAPE_UTIL"; exit ; else e_success "ESCAPE_UTIL is set"; fi	
+	if [ ! -e ${ESCAPE_SETTINGS} ]; then e_error "ESCAPE_SETTINGS is unset or incorrect"; else e_success "ESCAPE_SETTINGS is set"; fi	
+	if [ ! -e $ESCAPE_SRC ]; then e_error "$ESCAPE_SRC is unset or incorrect"; else e_success "ESCAPE_SRC is set"; fi	
+	if [ ! -e $ESCAPE_RES ]; then e_error "$ESCAPE_RES is unset or incorrect"; else e_success "ESCAPE_RES is set"; fi	
+	if [ ! -e $ESCAPE_TMP ]; then e_error "$ESCAPE_TMP is unset or incorrect"; else e_success "ESCAPE_TMP is set"; fi	
+	echo
+	
+	#Scripts
+	e_header "Scripts"
+	#if [ ! -e $ESCAPE_SRC/m_principal ]; then e_error "$ESCAPE_SRC/m_principal is missing"; else e_success "ESCAPE_SRC/m_principal exist"; fi	
+	valPath=$ESCAPE_SRC/m_principal; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+	valPath=$ESCAPE_SRC/m_mail; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+	valPath=$ESCAPE_SRC/m_maltego; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+	valPath=$ESCAPE_SRC/m_journal; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+	valPath=$ESCAPE_SRC/m_connexiond; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+	valPath=$ESCAPE_SRC/m_code; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+	valPath=$ESCAPE_SRC/boot; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+	valPath=$ESCAPE_SRC/timer; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+	echo
+	
+	#Fichiers ressources 
+	e_header "Fichiers ressources"
+
+		e_header2 "Fichiers mail"
+		valPath=$ESCAPE_RES/mail_reception_list.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_reception_1.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_reception_2.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_reception_3.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_reception_4.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_reception_5.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_envois_list.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_envois_1.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_envois_2.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_envois_3.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_envois_4.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/mail_envois_5.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		echo
+
+		e_header2 "Fichiers journaux"
+		valPath=$ESCAPE_RES/journal_list.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/journal_1.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/journal_2.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/journal_3.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/journal_4.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/journal_5.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		echo
+
+		e_header2 "Fichiers demarrage"
+		valPath=$ESCAPE_RES/bootlist.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		valPath=$ESCAPE_RES/bootlistDefault.txt; valName=$(echo ${valPath##*/}); if [ ! -e $valPath ]; then e_error "$valPath is missing"; else e_success "$valName exist"; fi	
+		echo
+
+
+	echo
+	e_warning2 "DONE"
+
+	user_wait_input "Appuyez sur [ENTRER] pour continuer"; if is_confirmed; then menu_admin; else menu_admin; fi; 
+
+}
+
+function quitter
+{
+	#kill $timerPID
+	pkill timer; pkill chat; pkill boot
+	echo -n "Fin du script launcher" 
+	sleep 2
+	for i in {0..2}; do echo -n "." ; sleep $ESCAPE_SLEEPTIME_S; done
+	echo
+	exit 0
+}
+
+main

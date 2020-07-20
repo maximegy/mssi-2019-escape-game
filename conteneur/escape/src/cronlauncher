@@ -1,0 +1,54 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de cron qui s'occupe du redémarrage                       |
+#|				des scripts si fermés par erreur                                  |
+#|
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 10-06-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+srcDir=/home/kali/escape/src
+export ESCAPE_UTIL=/home/kali/escape/res/escape_f_utils
+source $ESCAPE_UTIL
+
+
+while true
+do
+	clear
+	e_header "CRONTAB CHECK -"
+       	echo "date : $(date +%H:%M:%S)"
+
+	hackerScript=`/bin/ps -fu $USER| grep "boot" | grep -v "grep" | awk '{print $2}'`
+	echo $(e_warning "boot PID : ") ${bold} $hackerScript ${reset}
+
+	timerScript=`/bin/ps -fu $USER| grep "timer" | grep -v "grep" | awk '{print $2}'`
+	echo $(e_warning "timer PID : ") ${bold}$timerScript ${reset}
+
+	chatScript=`/bin/ps -fu $USER| grep "chat" | grep -v "grep" | awk '{print $2}'`
+	echo $(e_warning "chat PID : ") ${bold}$chatScript ${reset}
+
+
+	if [ -e $hackerScript ]; then 
+		#lancement de la simulation 
+		#bash -c "gnome-terminal -- $srcDir/boot" & 
+		bash -c "xfce4-terminal --geometry +0+0 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"HACKER PC\" -x $ESCAPE_SRC/boot" & 
+	fi
+
+	if [ -e $timerScript ]; then 
+		#lancement du timer 
+		#bash -c "gnome-terminal -- $srcDir/timer" & 
+	bash -c "xfce4-terminal --geometry +1400+20 --hide-menubar --hide-toolbar --hide-scrollbar --title=TIMER -x $ESCAPE_SRC/timer" & 
+	fi
+
+	if [ -e $chatScript ]; then 
+		#lancement du timer 
+		#bash -c "gnome-terminal -- $srcDir/timer" & 
+	bash -c "xfce4-terminal --geometry 60x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
+	fi
+
+
+	sleep 1
+done

@@ -1,0 +1,97 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.2                                                                 |
+#| Description : Script de simulation du demarrage de la session hackeuse        |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#|                                                                                |
+#| Version : V0.1 : Initialisation du script                                      |
+#| Version : V0.2 : Modification pour afficher des couleurs pendant le boot       |
+#|                                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+hackerName=
+fichierBoot=bootlist.txt
+
+function main()
+{
+	init
+	demarage_poste
+}
+
+function init()
+{
+	resize -s 50 80
+	hackerName=$(read_settings hackerName)	
+}
+
+# Simulation de démarage de poste
+function demarage_poste()
+{	
+	clear
+	echo "Appuyer sur [ ${bold}$(e_flash "ENTRER") ] pour initialiser la session ..."
+	read   
+	i=1	
+	for i in {0..10}
+	do 
+		echo "."
+	       	i=$i+1
+		sleep $ESCAPE_SLEEPTIME_S
+      	done
+	clear
+
+	echo "Bonjour "$hackerName
+	echo
+	sleep $ESCAPE_SLEEPTIME_M
+	echo "Demarrage de la session [${bold}$(e_flash "En cours")]"
+	echo
+	sleep $ESCAPE_SLEEPTIME_M
+
+	#chargement &
+	#PID=$(echo $!)
+	#echo $PID
+	#kill $PID
+	
+	# Simule un lancement de process
+	while read line
+    do
+
+		# Affichage de ligne en rouge de temps en temps 
+		randomRed=$(echo $RANDOM |cut -c1-2) # nombres de 1 a 99
+		if [ "$randomRed" -le "10" ]; then  # RED
+    		echo -$(e_warning $(date +%H%M%S))- [$(echo $RANDOM |cut -c1-3)-$(echo $RANDOM |cut -c1-3)] $(e_error $line)
+		elif [ "$randomRed" -le "15" ]; then # ORANGE
+    		echo -$(e_warning $(date +%H%M%S))- [$(echo $RANDOM |cut -c1-3)-$(echo $RANDOM |cut -c1-3)] $(e_warning $line)
+		else 							     # CLASSIC / GREEN ?
+    		echo -$(e_warning $(date +%H%M%S))- [$(echo $RANDOM |cut -c1-3)-$(echo $RANDOM |cut -c1-3)] $(e_success $line)
+		fi
+		sleep 0.05
+    done < $ESCAPE_RES/$fichierBoot
+
+	echo
+	echo "Demarrage de la session [${bold}$(e_success "OK")]"
+	echo "Affichage du menu ..."
+	sleep $ESCAPE_SLEEPTIME_M
+
+
+	# Lancement du Timer 
+	timerScript=`/bin/ps -fu $USER| grep "timer" | grep -v "grep" | awk '{print $2}'`
+	if [ "$timerScript" == "" ]; then 
+		bash -c "xfce4-terminal --geometry +1400+20 --hide-menubar --hide-toolbar --hide-scrollbar --title=TIMER -x $ESCAPE_SRC/timer" & 
+	fi
+	
+	# Lancement du Chat 
+	chatScript=`/bin/ps -fu $USER| grep "chat" | grep -v "grep" | awk '{print $2}'`
+	if [ "$chatScript" == "" ]; then
+		bash -c "xfce4-terminal --geometry 60x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
+	fi
+
+	$ESCAPE_SRC/m_principal
+	
+}
+
+main

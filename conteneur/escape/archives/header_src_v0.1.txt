@@ -1,0 +1,90 @@
+
+========== launcher ==========
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de lancement pour les scripts de la hackeuse              |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+========== src/boot ==========
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de simulation du demarrage du poste de la hackeuse        |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+========== src/m_connexiond ==========
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de simulation de connexion SSH                            |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+========== src/m_journal ==========
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script d'affichage des pages de journal de la hackeuse           |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+========== src/m_mail ==========
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de simulation d'une boite mail                            |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+========== src/m_maltego ==========
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de simulation d'un fichier maltego                        |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+========== src/m_mdp ==========
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script qui simule un crackage de mot de passe                    |
+#|		sous la forme du jeu mastermind                                           |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+========== src/m_principal ==========
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script du menu principal du poste de la hackeuse                 |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+

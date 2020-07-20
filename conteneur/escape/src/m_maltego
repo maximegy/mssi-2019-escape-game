@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de simulation d'un fichier maltego                        |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+function main()
+{
+	e_warning2 "Lancement de l'interface maltego ..."
+	sleep 2
+	menu_maltego
+}
+
+function menu_maltego
+{
+	echo ""
+	e_error "Erreur: L'interface n'est pas encore crée"
+	user_wait_input "Appuyez sur une touche pour revenir au menu precedent"; if is_confirmed; then $ESCAPE_SRC/m_principal; fi 
+	exit 0
+}
+
+main

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de menu pour entrer un code afin de debloqué              |
+#| 					des fonctionalitées cachées                                   |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 24-06-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+function main()
+{
+	code1=$(read_settings pass_h1)	
+	code2=$(read_settings pass_h2)	
+
+	menu_code
+}
+
+# Menu principal du script
+function menu_code()
+{
+
+	clear
+	e_header "MENU CODE"
+
+	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo
+	echo -n  $(e_warning2 "Entrez un code : " ) 
+	read code
+
+	if [ "$code" == "$code1" ] ; then
+		e_success "code1"
+		sleep $ESCAPE_SLEEPTIME_M
+		menu_code
+	elif [ "$code" == "$code2" ] ; then
+		e_success "code2"
+		sleep $ESCAPE_SLEEPTIME_M
+		menu_code
+	elif [ "$code" == "Q" ] ; then
+		$ESCAPE_SRC/m_principal
+	else
+		echo
+		echo -n $(e_warning "Ce code ne débloque rien ...")
+		sleep $ESCAPE_SLEEPTIME_M
+		menu_code
+	fi
+}
+
+
+main

@@ -1,0 +1,87 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| version : v0.1                                                                 |
+#| description : script de compte a rebour                                        |
+#| auteur : cesi mssi 2019 [maxence serment]                                      |
+#| date : 08-06-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+# format needed is HH:MM:SS
+timer=$(read_settings timer)	
+tmpFile=$ESCAPE_TMP/timer.tmp
+
+function main()
+{
+	resize -s 10 83
+	getOldTimerValue $timer
+	lancement_timer 
+}
+
+function getOldTimerValue()
+{
+	IFS=":"
+	heure=( $1 )
+	secondes=$((  (heure[0] * 60 * 60) + (heure[1] * 60) + heure[2]  ))
+
+	if [ -f $tmpFile ] ; then
+		echo "exist"
+
+		i=0
+		while IFS= read -r ligne; 
+		do
+		  #traitement des lignes 1 et 2
+		  if [ "$i" -eq 0 ]; then
+			  debut=$ligne
+		  elif [ "$i" -eq 1 ]; then
+			  fin=$ligne
+		  fi
+
+		  # incrementation du compteur
+		  i=$(($i+1))
+		done < $tmpFile
+	else
+		echo "n'existe pas"
+		debut=$(date +%s)
+		fin=$((debut + secondes))
+	fi
+}
+
+function lancement_timer()
+{
+	clear
+	current=$(date +%s)
+
+	sauvegardeTimer $debut $fin
+
+	while [[ $current -lt $fin ]]
+	do
+		current=$(date +%s)
+		reste=$((fin-current))
+
+		clear
+		printf "\r%02d : %02d : %02d" \
+		$((reste/3600)) $(( (reste/60)%60)) $((reste%60)) | figlet -t -f banner3 #ogre #rev
+		sleep 1
+	done
+	
+	echo
+	e_warning2 "timer is up !"
+	echo "current date is : " $current
+	echo "end date is     : " $fin
+	sleep 10
+	exit
+}
+
+# Ecriture des valeurs de debut et de fin dans un fichier
+function sauvegardeTimer()
+{
+	echo $1 > $tmpFile
+	echo $2 >> $tmpFile
+}
+
+
+main 

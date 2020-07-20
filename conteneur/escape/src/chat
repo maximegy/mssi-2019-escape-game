@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.2                                                                 |
+#| Description : Script chat / d'aide pour communiquer avec les joueurs
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 25-07-20                                                                |
+#|                                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+function main()
+{
+	init
+}
+
+function init()
+{
+	e_header "CHAT / AIDE"
+	echo $(e_warning2 "") "Tapez '?' puis 'ENTRER' avant de poser une question" 
+	echo
+	echo $(tty) > /tmp/TTY_JOUEURS
+	bash
+}
+
+
+
+main

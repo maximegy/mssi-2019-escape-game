@@ -1,0 +1,68 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script qui simule un crackage de mot de passe                    |
+#|	    sous la forme du jeu mastermind                                           |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+mdp=""
+essai=""
+
+function main ()
+{
+	mdp=$(read_settings pass_finder)	
+	menu_mdp
+}
+
+function menu_mdp()
+{
+	clear	
+	e_header "HACK DE MOT DE PASSE"
+	e_warning "Ouverture du hash ... "
+	sleep $ESCAPE_SLEEPTIME_M
+	affichageMdpCache
+	
+}
+
+function affichageMdpCache()
+{	
+	mdp_taille=${#mdp}
+	
+	echo -n "Mot de passe a trouver : " 
+	sleep 1
+	
+	for i in $(seq 0 $mdp_taille)
+	do
+		echo -n "_ "
+		sleep $ESCAPE_SLEEPTIME_S
+	done
+
+	echo "[0/$mdp_taille]"
+	echo -n "Recherche de caracteres ? : "
+	read choix
+	
+	testMdp $choix
+	menu_mdp
+	
+}
+
+function testMdp()
+{
+	a=${mdp}
+	b=$1
+
+	strindex() { 
+	  x="${1%%$2*}"
+	  [[ "$x" = "$1" ]] && echo -1 || echo "${#x}"
+	}
+	strindex "$a" "$b"   # prints 4
+
+}
+
+main

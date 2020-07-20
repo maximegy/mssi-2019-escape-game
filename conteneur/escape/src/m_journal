@@ -1,0 +1,79 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script d'affichage des pages de journal de la hackeuse           |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+listeJournaux=$ESCAPE_RES/journal_list.txt
+
+function main()
+{
+	menu_journal
+}
+
+
+# Affichage de la liste des journaux
+function menu_journal()
+{
+	clear
+	e_header "JOURNAUX"
+	cat $listeJournaux
+	echo "================================="
+	echo
+	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo
+	echo -n "Faites un choix : "
+	read choix
+	
+	if [ "$choix" == "1" ] ; then
+		affichagePage 1
+	elif [ "$choix" == "2" ] ; then
+		affichagePage 2
+	elif [ "$choix" == "3" ] ; then
+		affichagePage 3
+	elif [ "$choix" == "4" ] ; then
+		affichagePage 4
+	elif [ "$choix" == "5" ] ; then
+		affichagePage 4
+	
+	elif [ "$choix" == "Q" ] ; then
+		$ESCAPE_SRC/m_principal
+
+	else
+		echo
+		echo -n $(e_warning "Veuillez selectionner un des choix du menu. [chiffre de 1 a 5]")
+		sleep $ESCAPE_SLEEPTIME_M
+		menu_journal
+	fi
+}
+
+
+function affichagePage()
+{
+
+	numero=$1 #numero de la page a afficher
+
+	clear
+	e_header "AFFICHAGE DE LA PAGE #$numero"
+	echo 
+	# Affiche la page
+	if [ $numero == "1" ]; then nomFichier=$ESCAPE_RES/journal_1.txt; fi
+	if [ $numero == "2" ]; then nomFichier=$ESCAPE_RES/journal_2.txt; fi
+	if [ $numero == "3" ]; then nomFichier=$ESCAPE_RES/journal_3.txt; fi
+	if [ $numero == "4" ]; then nomFichier=$ESCAPE_RES/journal_4.txt; fi
+	if [ $numero == "5" ]; then nomFichier=$ESCAPE_RES/journal_5.txt; fi
+
+	cat $nomFichier
+	echo "==========================================="
+	echo
+	user_wait_input "Appuyez sur une touche pour revenir au menu precedent"; if is_confirmed; then menu_reception; fi 
+	menu_journal
+}
+
+main

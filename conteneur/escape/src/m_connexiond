@@ -1,0 +1,108 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de simulation de connexion SSH                            |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 27-05-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+password1=defaultpass1
+password2=defaultpass2
+password3=defaultpass3
+
+
+function main()
+{
+	password1=$(read_settings pass_ecotech)	
+	password2=$(read_settings pass_xxx)	
+	password3=$(read_settings pass_yyy)	
+	menu_connexiond
+}
+
+function menu_connexiond
+{
+
+	clear
+	e_header "CONNEXION A DISTANCE"
+	echo "1: Connexion serveur : [ECOTECH]"
+	echo "2: Connexion serveur : [xxx]"
+	echo "3: Connexion serveur : [yyy]"
+	echo
+	echo "Q: Quitter cet ecran et revenir au precedent"
+	echo "======================================"
+	echo -n "Faites un choix : "
+	read choix
+	
+	if [ "$choix" == "1" ] ; then
+		connexionServeur ECOTECH
+	elif [ "$choix" == "2" ] ; then
+		connexionServeur XXX
+	elif [ "$choix" == "3" ] ; then
+		connexionServeur YYY
+	elif [ "$choix" == "Q" ] ; then
+		$ESCAPE_SRC/m_principal
+	else
+		echo
+		echo -n $(e_warning "Veuillez selectionner un des choix du menu ")
+		sleep $ESCAPE_SLEEPTIME_M
+		menu_connexiond
+	fi
+}
+
+# Simulation de connexion a distance
+function connexionServeur()
+{
+
+	clear
+	e_header "CONNEXION A DISTANCE"
+	echo "Connexion au serveur $1 ..."
+	sleep $ESCAPE_SLEEPTIME_M
+	echo
+	echo "Attention : "${tan}$(e_flash "Un mot de passe")" est nécéssaire pour cette connexion"
+	user_confirmation "Voulez vous continuer ?"
+	if is_confirmed; then 
+		e_warning "Entrez 'Q' pour quitter cet ecran et revenir au precedent"
+		echo
+		motDePasse $1
+	else 
+		echo
+		echo -n "Retour au menu des connexion ..."
+		sleep $ESCAPE_SLEEPTIME_M
+	 	menu_connexiond
+	 fi
+
+}
+
+function motDePasse()
+{
+	password=
+	if [ "$1" == "ECOTECH" ] ; then password=$password1; fi
+	if [ "$1" == "XXX" ] ; then password=$password2; fi
+	if [ "$1" == "YYY" ] ; then password=$password3; fi
+
+	echo -n "Mot de passe : "
+	read choix
+	
+	if [ "$choix" == "$password" ] ; then
+		#Password is valid !	
+		e_success "Le mot de passe est valide !"
+		e_warning2 "Connexion au serveur ..."
+		sleep 2
+		
+
+	elif [ "$choix" == "Q" ] ; then
+		menu_connexiond
+	else
+		e_error "Erreur : Le mot de passe est incorrect"
+		sleep $ESCAPE_SLEEPTIME_M
+		motDePasse $1
+	fi
+
+
+}
+
+main
