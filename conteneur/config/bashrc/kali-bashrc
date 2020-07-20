@@ -4,6 +4,7 @@
 alias ll='ls -l --color'
 alias bashf='vim ~/.bashrc'
 
+cd /home/kali
 
 function set-title()
 {
