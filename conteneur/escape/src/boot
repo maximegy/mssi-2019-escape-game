@@ -74,6 +74,7 @@ function demarage_poste()
 
 	echo
 	echo "Demarrage de la session [${bold}$(e_success "OK")]"
+	sleep 3
 	timer=$(read_settings timer)
 	echo
     echo "#################################################################"
