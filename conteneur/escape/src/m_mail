@@ -18,7 +18,8 @@ function main()
 {
 	#e_warning2 "lancement de l'interface de mail "
 	#sleep $ESCAPE_SLEEPTIME_M 
-	menu_mail
+	#menu_mail # plus besoin si uniquement la boite de reception
+	menu_reception
 }
 
 function menu_mail()
@@ -26,7 +27,7 @@ function menu_mail()
 	clear
 	e_header "BOITE MAIL"
 	echo "1: Boite de reception"
-	echo "2: Boite d'envois"
+	#echo "2: Boite d'envois"
 	echo
 	echo "q: Quitter cet ecran et revenir au precedent"
 	echo "======================================"
@@ -35,8 +36,8 @@ function menu_mail()
 	
 	if [ "$choix" == "1" ] ; then
 		menu_reception
-	elif [ "$choix" == "2" ] ; then
-		menu_envois
+	#elif [ "$choix" == "2" ] ; then
+	#	menu_envois
 	elif [ "$choix" == "q" ] ; then
 		$ESCAPE_SRC/m_principal
 	else
@@ -67,17 +68,13 @@ function menu_reception()
 		affichageMail_reception 2
 	elif [ "$choix" == "3" ] ; then
 		affichageMail_reception 3
-	elif [ "$choix" == "4" ] ; then
-		affichageMail_reception 4
-	elif [ "$choix" == "5" ] ; then
-		affichageMail_reception 5
-	
 	elif [ "$choix" == "q" ] ; then
-		menu_mail
+		#menu_mail
+		$ESCAPE_SRC/m_principal
 
 	else
 		echo
-		echo -n $(e_warning "Veuillez selectionner un des choix du menu. [chiffre de 1 a 5]")
+		echo -n $(e_warning "Veuillez selectionner un des choix du menu. [chiffre de 1 a 3]")
 		sleep $ESCAPE_SLEEPTIME_M
 		menu_reception
 	fi
@@ -91,19 +88,19 @@ function affichageMail_reception()
 	e_header "AFFICHAGE DU MAIL #$numero"
 
 	# Affiche le mail 
-	if [ $numero == "1" ]; then nomFichier=$ESCAPE_RES/mail_reception_1.txt; fi
-	if [ $numero == "2" ]; then nomFichier=$ESCAPE_RES/mail_reception_2.txt; fi
-	if [ $numero == "3" ]; then nomFichier=$ESCAPE_RES/mail_reception_3.txt; fi
-	if [ $numero == "4" ]; then nomFichier=$ESCAPE_RES/mail_reception_4.txt; fi
-	if [ $numero == "5" ]; then nomFichier=$ESCAPE_RES/mail_reception_5.txt; fi
+	if [ $numero == "1" ]; then nomFichier=$ESCAPE_RES/17-email1.png; fi
+	if [ $numero == "2" ]; then nomFichier=$ESCAPE_RES/18-email2.png; fi
+	if [ $numero == "3" ]; then nomFichier=$ESCAPE_RES/19-email3.png; fi
 
-	cat $nomFichier
+	#cat $nomFichier
+	eog $nomFichier &
 	echo "==========================================="
 	echo
 	user_wait_input "Appuyez sur une touche pour revenir au menu precedent"; if is_confirmed; then menu_reception; fi 
 	menu_reception
 }
 
+## PLUS UTILISEE ##
 function affichageMail_envois()
 {
 	numero=$1 #numero du mail a afficher
