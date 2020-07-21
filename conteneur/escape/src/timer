@@ -70,6 +70,8 @@ function lancement_timer()
 
     bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
 	sleep 0.2
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+	sleep 0.2
     # bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
 	# sleep 0.2
     # bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
@@ -114,10 +116,8 @@ function lancement_timer()
 	# sleep 0.2
     # bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
 	# sleep 0.2
-    # bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-	# sleep 0.2
-    bash -c "xfce4-terminal --geometry +500+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/lost" &
-
+    bash -c "xfce4-terminal --geometry 65*8+500+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/lost" &
+read
 }
 
 # Ecriture des valeurs de debut et de fin dans un fichier
