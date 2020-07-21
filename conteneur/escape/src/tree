@@ -1,0 +1,6 @@
+#!/bin/bash
+while true; do
+    time=$(shuf -i 0-2 -n 1)
+    sleep $time
+    tree /
+done
