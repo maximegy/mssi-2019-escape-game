@@ -61,3 +61,36 @@ echo "Ce script nécessite la dernière image de l'escape game"
 echo "-> Téléchargement de l'image"
     docker pull maximegy/kali-desktop-cesi:latest
 
+while true; do
+clear
+echo ""
+echo "#################################################################################"
+echo "#                                                                               #"
+echo "#                                 MENU PRINCIPAL                                #"
+echo "#                                                                               #"
+echo "#################################################################################"
+echo ""
+echo "                  Reset -------------------------------------- : 1"
+echo "                  Connection au conteneur existant ----------- : 2"
+echo "                  Télécharger la dernière image -------------- : 3"
+echo "                  Arrêter et supprimer le conteneur ---------- : 4"
+echo "                  Quitter ------------------------------------ : Q"
+read choix
+
+case $choix in
+1)
+    docker stop pc-hacker
+    docker rm pc-hacker
+    docker run -d -p 5900:5900 -p 6080:6080 --name pc-hacker --privileged -e RESOLUTION=1920x1080x24 -e ESCAPE_UTIL="/home/kali/escape/res/escape_f_utils" -e USER=kali -e PASSWORD=kaligator -e ROOT_PASSWORD=AzertyuiopROOT maximegy/kali-desktop-cesi:latest
+    docker exec -it pc-hacker bash -c 'echo $(tty) > /tmp/TTY_ADMIN && chown kali:kali /tmp/TTY_ADMIN && chown kali:kali $(tty) && bash'
+;;
+2)
+    docker exec -it pc-hacker bash -c 'echo $(tty) > /tmp/TTY_ADMIN && chown kali:kali /tmp/TTY_ADMIN && chown kali:kali $(tty) && bash'
+;;
+3)
+    docker pull maximegy/kali-desktop-cesi:latest
+;;
+4)
+    docker stop pc-hacker
+    docker rm pc-hacker
+;;
