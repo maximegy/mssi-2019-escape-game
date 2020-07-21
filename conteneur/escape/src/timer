@@ -68,34 +68,19 @@ function lancement_timer()
 		sleep 1
 	done
 
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
-    bash -c "xfce4-terminal --geometry +500+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/lost" &
- 
-
-
+	for i in {1..10}; 
+	do 
+		random=$(shuf -i 1-2 -n 1)
+		x=$(shuf -i 10-1500 -n 1)
+		y=$(shuf -i 10-600 -n 1)
+		if [ random == 1 ]; then
+			bash -c "xfce4-terminal --geometry $x+$y --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+		else
+			bash -c "xfce4-terminal --geometry $x+$y --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/tree" &
+		fi
+	done
+    bash -c "xfce4-terminal --geometry 65x9+960+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/lost" &
+	pkill boot; pkill chat
 }
 
 # Ecriture des valeurs de debut et de fin dans un fichier

@@ -1,11 +1,12 @@
+#!/bin/bash
 while true; do
 	clear
     echo "#################################################################"
     echo "#                       __ ATTENTION __                         #"
     echo "#                                                               #"
     echo "#              LA SESSION EST ARRIVEE A EXPIRATION              #"
-    echo "#                    OUVERTURE DE LA SESSION                    #"
-    echo "#                        EN COURS ...                           #"
+    echo "#              TOUS LES FICHIERS ONT ETE SUPPRIMES              #"
+    echo "#                          AUREVOIR                             #"
     echo "#                                                               #"
     echo "#################################################################"
     sleep 10
