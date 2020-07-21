@@ -10,16 +10,17 @@
 
 source $ESCAPE_UTIL
 
-password1=defaultpass1
-password2=defaultpass2
-password3=defaultpass3
+password1=defaultpass1!
+password2=defaultpass2!
+password3=defaultpass3!
 
 
 function main()
 {
-	password1=$(read_settings pass_ecotech)	
-	password2=$(read_settings pass_xxx)	
-	password3=$(read_settings pass_yyy)	
+	hackerName=$(read_settings hackerName)	
+	password1=$(read_settings pass_xp)	
+	password2=$(read_settings pass_caviar)	
+	password3=$(read_settings pass_bourgeau)	
 	menu_connexiond
 }
 
@@ -28,9 +29,9 @@ function menu_connexiond
 
 	clear
 	e_header "CONNEXION A DISTANCE"
-	echo "1: Connexion serveur : [ECOTECH]"
-	echo "2: Connexion serveur : [xxx]"
-	echo "3: Connexion serveur : [yyy]"
+	echo "1: [WINDOWS XP]        : 10.2.145.29" 
+	echo "2: [POSTE DE CAVIAR]   : 10.2.145.114"
+	echo "3: [POSTE DE BOURGEAU] : 10.2.145.155"
 	echo
 	echo "q: Quitter cet ecran et revenir au precedent"
 	echo "======================================"
@@ -38,11 +39,11 @@ function menu_connexiond
 	read choix
 	
 	if [ "$choix" == "1" ] ; then
-		connexionServeur ECOTECH
+		connexionServeur "10.2.114.29 - WINDOWS XP"
 	elif [ "$choix" == "2" ] ; then
-		connexionServeur XXX
+		connexionServeur "10.2.145.114 - POSTE DE CAVIAR"
 	elif [ "$choix" == "3" ] ; then
-		connexionServeur YYY
+		connexionServeur "10.2.145.155 - POSTE DE BOURGEAU"
 	elif [ "$choix" == "q" ] ; then
 		$ESCAPE_SRC/m_principal
 	else
@@ -80,9 +81,9 @@ function connexionServeur()
 function motDePasse()
 {
 	password=
-	if [ "$1" == "ECOTECH" ] ; then password=$password1; fi
-	if [ "$1" == "XXX" ] ; then password=$password2; fi
-	if [ "$1" == "YYY" ] ; then password=$password3; fi
+	if [ "$1" == "10.2.114.29" ] ; then password=$password1; fi
+	if [ "$1" == "10.2.145.114" ] ; then password=$password2; fi
+	if [ "$1" == "10.2.145.155" ] ; then password=$password3; fi
 
 	echo -n "Mot de passe : "
 	read choix
@@ -92,9 +93,61 @@ function motDePasse()
 		e_success "Le mot de passe est valide !"
 		e_warning2 "Connexion au serveur ..."
 		sleep 2
-		
 
-	elif [ "$choix" == "Q" ] ; then
+		# Connexion 10.2.114.29  : XP
+		if [ "$1" == "10.2.114.29" ] ; then 
+			sleep $ESCAPE_SLEEPTIME_M
+			echo "- Affichage des prototypes 1 & 2 ..."
+			eog $ESCAPE_RES/planMaisonProt1.png & 
+			sleep 0.5
+			eog $ESCAPE_RES/planMaisonProt2.png &
+			echo "- Message reçu : Mission accomplie ..." # fin de l'escape game 
+			eog $ESCAPE_RES/textDeFeliciations4.gif &
+			echo
+			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi 
+			menu_connexiond
+
+		fi
+		# Connexion 10.2.145.114 : POSTE DE CAVIAR
+		if [ "$1" == "10.2.145.114" ] ; then 
+			sleep $ESCAPE_SLEEPTIME_M
+
+			sleep 0.2
+			echo "- Calendrier ELiot ALLARD"
+			eog $ESCAPE_RES/calendrier-Eliot.png &
+			sleep 0.2
+			echo "- Carte visite restaurant"
+			eog $ESCAPE_RES/CarteVisiteRestaurant.png & 
+
+			user_wait_input "Appuyez sur [ENTREE] pour continuer ..."; if is_confirmed; then menu_connexiond; fi 
+
+			sleep 0.2
+			echo "- Note de la secretaire"
+			eog $ESCAPE_RES/24_note_du_secretaire.png & 
+			sleep 0.2
+			echo "- Page de journal #0 $hackerName"
+			eog $ESCAPE_RES/19_journal_2_1.png & 
+
+			echo
+			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi 
+			menu_connexiond
+
+		fi
+		# Connexion 10.2.145.155 : POSTE DE BOURGEAU
+		if [ "$1" == "10.2.145.155" ] ; then 
+			sleep 0.2
+			echo "$(e_error "Echec de connexion : ${bold}${red}Connexion refusée ...${reset}")" # echec normal
+			sleep $ESCAPE_SLEEPTIME_L
+
+			echo "- Page de journal #0 $hackerName"
+			eog $ESCAPE_RES/19_journal_2_1.png & 
+			echo
+			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi 
+			menu_connexiond
+		fi
+
+
+	elif [ "$choix" == "q" ] ; then
 		menu_connexiond
 	else
 		e_error "Erreur : Le mot de passe est incorrect"
