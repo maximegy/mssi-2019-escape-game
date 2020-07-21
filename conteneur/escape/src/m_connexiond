@@ -92,7 +92,6 @@ function motDePasse()
 		#Password is valid !	
 		e_success "Le mot de passe est valide !"
 		e_warning2 "Connexion au serveur ..."
-		sleep 2
 
 		# Connexion 10.2.114.29  : XP
 		if [ "$1" == "10.2.114.29" ] ; then 
@@ -124,9 +123,6 @@ function motDePasse()
 			sleep 0.2
 			echo "- Note de la secretaire"
 			eog $ESCAPE_RES/24_note_du_secretaire.png & 
-			sleep 0.2
-			echo "- Page de journal #0 $hackerName"
-			eog $ESCAPE_RES/19_journal_2_1.png & 
 
 			echo
 			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi 
@@ -135,13 +131,20 @@ function motDePasse()
 		fi
 		# Connexion 10.2.145.155 : POSTE DE BOURGEAU
 		if [ "$1" == "10.2.145.155" ] ; then 
-			sleep 0.2
-			echo "$(e_error "Echec de connexion : ${bold}${red}Connexion refusée ...${reset}")" # echec normal
+			chars="/-\|"
+			echo
+			for i in {1..20}
+			 do
+						for (( i=0; i<${#chars}; i++ )); do
+							sleep 0.1
+							echo -en "${chars:$i:1}" "\r"
+						done
+			done
+			echo;echo
+			echo "$(e_error "Echec de connexion : ${bold}${red}${flashred}Connexion refusée !${reset}")" # echec normal
+			echo "$(e_error "Acces a distance ${bold}impossible ${reset}...")"
 			sleep $ESCAPE_SLEEPTIME_L
 
-			echo "- Page de journal #0 $hackerName"
-			eog $ESCAPE_RES/19_journal_2_1.png & 
-			echo
 			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi 
 			menu_connexiond
 		fi
