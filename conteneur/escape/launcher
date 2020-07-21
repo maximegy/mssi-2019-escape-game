@@ -20,9 +20,12 @@ function main()
 function init()
 {
 	currentPath=$(pwd)
+	echo $currentPath
 	# Recuperation du script utilitaire	
 	export ESCAPE_UTIL=$currentPath/res/escape_f_utils
+	echo $ESCAPE_UTIL
 	source $ESCAPE_UTIL
+	read
 }
 
 # Vérifie l'existence des scripts et le renseignements des variables d'environement
