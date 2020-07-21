@@ -1,0 +1,12 @@
+while true; do
+	clear
+    echo "#################################################################"
+    echo "#                       __ ATTENTION __                         #"
+    echo "#                                                               #"
+    echo "#              LA SESSION EST ARRIVEE A EXPIRATION              #"
+    echo "#                    OUVERTURE DE LA SESSION                    #"
+    echo "#                        EN COURS ...                           #"
+    echo "#                                                               #"
+    echo "#################################################################"
+    sleep 10
+done
