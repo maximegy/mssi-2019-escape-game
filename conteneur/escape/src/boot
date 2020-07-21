@@ -74,7 +74,7 @@ function demarage_poste()
 
 	echo
 	echo "Demarrage de la session [${bold}$(e_success "OK")]"
-	sleep 3
+	sleep 2
 	timer=$(read_settings timer)
 	echo
     echo "#################################################################"
@@ -86,7 +86,7 @@ function demarage_poste()
     echo "                       DANS $timer Minutes                       "
     echo
     echo "#################################################################"
-	sleep 10
+	sleep 5
 
 	echo "Affichage du menu ..."
 	sleep $ESCAPE_SLEEPTIME_M
