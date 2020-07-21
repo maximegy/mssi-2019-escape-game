@@ -74,6 +74,19 @@ function demarage_poste()
 
 	echo
 	echo "Demarrage de la session [${bold}$(e_success "OK")]"
+	timer=$(read_settings timer)
+	echo
+    echo "#################################################################"
+	echo ""
+    echo "                        __ ATTENTION __                         "
+    echo "                                                                "
+    echo "                   VOUS N'ÊTES PAS $hackerName                  "
+    echo "                TOUS LES FICHIERS SERONT ${bold}$(e_flash "SUPPRIMES")              "
+    echo "                       DANS $timer Minutes                       "
+    echo
+    echo "#################################################################"
+	sleep $ESCAPE_SLEEPTIME_M
+
 	echo "Affichage du menu ..."
 	sleep $ESCAPE_SLEEPTIME_M
 
