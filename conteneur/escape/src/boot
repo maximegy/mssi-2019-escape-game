@@ -85,7 +85,7 @@ function demarage_poste()
     echo "                       DANS $timer Minutes                       "
     echo
     echo "#################################################################"
-	sleep $ESCAPE_SLEEPTIME_M
+	sleep 10
 
 	echo "Affichage du menu ..."
 	sleep $ESCAPE_SLEEPTIME_M
