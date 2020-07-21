@@ -1,0 +1,10 @@
+De nous
+A vous
+Sujet Phishing / Ransomware 
+Date aujourd'hui
+
+
+La majorité des attaques ciblées sont diffusées via des e-mails adressés aux salariés.
+Les hackers  essayent de les piéger en leur faisant ouvrir des e-mails de phishing/hameçonnage dans le but de les faire cliquer sur des liens dangereux.
+Les attaques ciblées qui  ont  récemment  été  rendues  publiques  (le ransomware  WannaCry  notamment)  ont  affecté  des  dizaines  de  millions  d’utilisateurs et ont en général commencé par le biais d’un simple e-mail envoyé aux salariés.
+Bien que ces attaques ne  soient pas très sophistiquées, elles ont été incroyablement fructueuses en infectant des entreprises  tous secteurs confondus. 
