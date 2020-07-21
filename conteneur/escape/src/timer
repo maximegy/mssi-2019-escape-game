@@ -70,7 +70,7 @@ function lancement_timer()
 
     bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
 	sleep 0.2
-    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/tree" &
 	sleep 0.2
     # bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
 	# sleep 0.2
