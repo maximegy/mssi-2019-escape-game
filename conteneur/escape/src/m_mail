@@ -19,7 +19,20 @@ function main()
 	#e_warning2 "lancement de l'interface de mail "
 	#sleep $ESCAPE_SLEEPTIME_M 
 	#menu_mail # plus besoin si uniquement la boite de reception
-	menu_reception
+	
+	if [ "$ESCAPE_EXPORTVAR_MAIL" == "" ]; then 
+		echo "- Affichage des pages de journals #2"
+		eog $ESCAPE_RES/img/mailjournal/19_journal_2_3.png &
+		sleep 0.5
+		eog $ESCAPE_RES/img/mailjournal/19_journal_2_2.png &
+		sleep 0.5
+		eog $ESCAPE_RES/img/mailjournal/19_journal_2_1.png &
+		user_wait_input "Appuyez sur ${bold}[ENTRER]${reset}pour continuer"; if is_confirmed; then menu_reception; fi 
+		export ESCAPE_EXPORTVAR_MAIL=1
+	fi
+
+	menu_mail
+	#menu_reception
 }
 
 function menu_mail()
@@ -29,6 +42,7 @@ function menu_mail()
 	echo "1: Boite de reception"
 	#echo "2: Boite d'envois"
 	echo
+	echo "j: Revoir les pages du journal"
 	echo "q: Quitter cet ecran et revenir au precedent"
 	echo "======================================"
 	echo -n "Faites un choix : "
@@ -38,6 +52,16 @@ function menu_mail()
 		menu_reception
 	#elif [ "$choix" == "2" ] ; then
 	#	menu_envois
+	elif [ "$choix" == "j" ] ; then
+		echo "- Affichage des pages de journals #2"
+		sleep 0.5
+		eog $ESCAPE_RES/img/mailjournal/19_journal_2_3.png & 
+		sleep 0.5
+		eog $ESCAPE_RES/img/mailjournal/19_journal_2_2.png &
+		sleep 0.5
+		eog $ESCAPE_RES/img/mailjournal/19_journal_2_1.png &
+		user_wait_input "Appuyez sur ${bold}[ENTRER]${reset} pour continuer"; if is_confirmed; then menu_reception; fi 
+		menu_mail
 	elif [ "$choix" == "q" ] ; then
 		$ESCAPE_SRC/m_principal
 	else
@@ -88,9 +112,9 @@ function affichageMail_reception()
 	e_header "AFFICHAGE DU MAIL #$numero"
 
 	# Affiche le mail 
-	if [ $numero == "1" ]; then nomFichier=$ESCAPE_RES/17-email1.png; fi
-	if [ $numero == "2" ]; then nomFichier=$ESCAPE_RES/18-email2.png; fi
-	if [ $numero == "3" ]; then nomFichier=$ESCAPE_RES/19-email3.png; fi
+	if [ $numero == "1" ]; then nomFichier=$ESCAPE_RES/img/mail/m1/17-email1.png; fi
+	if [ $numero == "2" ]; then nomFichier=$ESCAPE_RES/img/mail/m2/18-email2.png; fi
+	if [ $numero == "3" ]; then nomFichier=$ESCAPE_RES/img/mail/m3/19-email3.png; fi
 
 	#cat $nomFichier
 	eog $nomFichier &
