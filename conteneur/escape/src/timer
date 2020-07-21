@@ -67,12 +67,35 @@ function lancement_timer()
 		$((reste/3600)) $(( (reste/60)%60)) $((reste%60)) | figlet -t -f banner3 #ogre #rev
 		sleep 1
 	done
-	
-	echo
-	e_warning2 "timer is up !"
-	echo "current date is : " $current
-	echo "end date is     : " $fin
-	read
+
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/matrix" &
+    bash -c "xfce4-terminal --geometry +500+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/lost" &
+ 
+
+
 }
 
 # Ecriture des valeurs de debut et de fin dans un fichier
