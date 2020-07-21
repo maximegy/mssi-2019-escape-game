@@ -44,9 +44,9 @@ function demarage_poste()
       	done
 	clear
 
-	echo "Bonjour "$hackerName
-	echo
-	sleep $ESCAPE_SLEEPTIME_M
+	#echo "Bonjour "$hackerName
+	#echo
+	#sleep $ESCAPE_SLEEPTIME_M
 	echo "Demarrage de la session [${bold}$(e_flash "En cours")]"
 	echo
 	sleep $ESCAPE_SLEEPTIME_M
@@ -74,6 +74,7 @@ function demarage_poste()
 
 	echo
 	echo "Demarrage de la session [${bold}$(e_success "OK")]"
+	echo "Detection de l'utilisateur $hackerName [${bold}$(e_error "FAILED")]"
 	sleep 3
 	timer=$(read_settings timer)
 	echo
@@ -86,8 +87,8 @@ function demarage_poste()
     echo "                       DANS $timer Minutes                       "
     echo
     echo "#################################################################"
-	sleep 10
 
+	user_wait_input "Appuyez sur [ENTREE] pour continuer"; if is_confirmed; then menu_connexiond; fi 
 	echo "Affichage du menu ..."
 	sleep $ESCAPE_SLEEPTIME_M
 
