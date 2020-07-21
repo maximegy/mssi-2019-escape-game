@@ -7,7 +7,7 @@ LABEL maintainer="Maxime VINCENT"
 RUN apt update
 
 # Escape program use figlet
-RUN apt install -y vim figlet eog
+RUN apt install -y vim figlet eog tree
 COPY --chown=root:root config/figlet/* /usr/share/figlet/
 
 # COPY bashrc for chat
