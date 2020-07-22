@@ -58,39 +58,78 @@ echo ""
 echo "#################################################################################"
 echo ""
 echo "Ce script nécessite la dernière image de l'escape game"
-echo "-> Téléchargement de l'image"
-    docker pull maximegy/kali-desktop-cesi:latest
+echo "Verification de la présence de l'image"
+    if [[ "$(docker images -q maximegy/kali-desktop-cesi:latest 2> /dev/null)" == "" ]]; then
+        echo "** L'image n'est pas présente **"
+        echo "-> Test de la connection internet en vue de son téléchargement"
+            sleep 2
+            wget -q --tries=20 --timeout=10 http://www.google.com -O /tmp/google.idx &> /dev/null
+            while [ ! -s /tmp/google.idx ]; do
+                echo "** Pas de connection internet **"
+                echo "-> Merci de faire les changements nécessaires"
+                echo "-- Nouveau test dans 10 secondes --"
+                sleep 10
+                wget -q --tries=20 --timeout=10 http://www.google.com -O /tmp/google.idx &> /dev/null
+            done
+        echo "** Connection Internet OK **"
+        echo "-> Téléchargement de la dernière image"
+            docker pull maximegy/kali-desktop-cesi:latest
+    else
+        echo "** L'image est déjà présente, pour la mettre à jour, connecter la machine à internet et utiliser le menu principal"
+        sleep 2
+    fi
 
 while true; do
-clear
-echo ""
-echo "#################################################################################"
-echo "#                                                                               #"
-echo "#                                 MENU PRINCIPAL                                #"
-echo "#                                                                               #"
-echo "#################################################################################"
-echo ""
-echo "                  Reset -------------------------------------- : 1"
-echo "                  Connection au conteneur existant ----------- : 2"
-echo "                  Télécharger la dernière image -------------- : 3"
-echo "                  Arrêter et supprimer le conteneur ---------- : 4"
-echo "                  Quitter ------------------------------------ : Q"
-read choix
+    clear
+    echo ""
+    echo "#################################################################################"
+    echo "#                                                                               #"
+    echo "#                                 MENU PRINCIPAL                                #"
+    echo "#                                                                               #"
+    echo "#################################################################################"
+    echo ""
+    echo "                Reset -------------------------------------- : 1"
+    echo "                Connection au conteneur existant ----------- : 2"
+    echo "                Redémarrer le conteneur -------------------- : 3"
+    echo "                Télécharger la dernière image -------------- : 4"
+    echo "                Arrêter et supprimer le conteneur ---------- : 5"
+    echo "                Quitter ------------------------------------ : Q"
+    read choix
 
-case $choix in
-1)
-    docker stop pc-hacker
-    docker rm pc-hacker
-    docker run -d -p 5900:5900 -p 6080:6080 --name pc-hacker --privileged -e RESOLUTION=1920x1080x24 -e ESCAPE_UTIL="/home/kali/escape/res/escape_f_utils" -e USER=kali -e PASSWORD=kaligator -e ROOT_PASSWORD=AzertyuiopROOT maximegy/kali-desktop-cesi:latest
-    docker exec -it pc-hacker bash -c 'echo $(tty) > /tmp/TTY_ADMIN && chown kali:kali /tmp/TTY_ADMIN && chown kali:kali $(tty) && bash'
-;;
-2)
-    docker exec -it pc-hacker bash -c 'echo $(tty) > /tmp/TTY_ADMIN && chown kali:kali /tmp/TTY_ADMIN && chown kali:kali $(tty) && bash'
-;;
-3)
-    docker pull maximegy/kali-desktop-cesi:latest
-;;
-4)
-    docker stop pc-hacker
-    docker rm pc-hacker
-;;
+    case $choix in
+    1) #Reset
+        echo "** Reset en cours ... **"
+        echo "-> Stop container"
+        docker stop pc-hacker
+        echo "-> Delete container"
+        docker rm pc-hacker
+        echo "-> Launch New container"
+        docker run -d -p 5900:5900 -p 6080:6080 --name pc-hacker --privileged -e RESOLUTION=1920x1080x24 -e ESCAPE_UTIL="/home/kali/escape/res/escape_f_utils" -e USER=kali -e PASSWORD=kaligator -e ROOT_PASSWORD=AzertyuiopROOT maximegy/kali-desktop-cesi:latest
+        echo "-> Connection au Nouveau conteneur"
+        docker exec -it pc-hacker bash -c 'echo $(tty) > /tmp/TTY_ADMIN && chown kali:kali /tmp/TTY_ADMIN && chown kali:kali $(tty) && bash'
+    ;;
+    2) # Connection au conteneur existant
+        echo "** Connection au conteneur existant ...  **"
+        docker exec -it pc-hacker bash -c 'echo $(tty) > /tmp/TTY_ADMIN && chown kali:kali /tmp/TTY_ADMIN && chown kali:kali $(tty) && bash'
+    ;;
+    3)
+        echo "Redémarrage du conteneur"
+        docker restart pc-hacker
+    4)
+        echo "Téléchargement de la dernière version"
+        docker pull maximegy/kali-desktop-cesi:latest
+    ;;
+    5)
+        echo "Stop conteneur"
+        docker stop pc-hacker
+        echo "Suppression du conteneur"
+        docker rm pc-hacker
+    ;;
+    [qQ] )
+        echo "Aurevoir"
+        break
+    ;;
+    *) echo "Entrée Invalide"
+    ;;
+    esac
+done
