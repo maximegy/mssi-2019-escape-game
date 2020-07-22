@@ -115,6 +115,7 @@ while true; do
     3)
         echo "Redémarrage du conteneur"
         docker restart pc-hacker
+    ;;
     4)
         echo "Téléchargement de la dernière version"
         docker pull maximegy/kali-desktop-cesi:latest
