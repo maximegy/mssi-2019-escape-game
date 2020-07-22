@@ -6,7 +6,7 @@ while true; do
     echo "#                                                               #"
     echo "#              LA SESSION EST ARRIVEE A EXPIRATION              #"
     echo "#              TOUS LES FICHIERS ONT ETE SUPPRIMES              #"
-    echo "#                          AUREVOIR                             #"
+    echo "#                         AUREVOIR  :)                          #"
     echo "#                                                               #"
     echo "#################################################################"
     sleep 10
