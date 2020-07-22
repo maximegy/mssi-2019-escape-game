@@ -63,7 +63,7 @@ function connexionServeur()
 	echo "Connexion au serveur $1 ..."
 	sleep $ESCAPE_SLEEPTIME_M
 	echo
-	echo "Attention : "${tan}$(e_flash "Un mot de passe")" est nécéssaire pour cette connexion"
+	echo "Attention : "${tan}$(e_flash "Un mot de passe")" est necessaire pour cette connexion"
 	user_confirmation "Voulez vous continuer ?"
 	if is_confirmed; then 
 		e_warning "Entrez 'q' pour quitter cet ecran et revenir au precedent"
@@ -97,11 +97,11 @@ function motDePasse()
 		if [ "$1" == "10.2.114.29" ] ; then 
 			sleep $ESCAPE_SLEEPTIME_M
 			echo "- Affichage des prototypes 1 & 2 ..."
-			eog $ESCAPE_RES/planMaisonProt1.png & 
+			eog $ESCAPE_RES/img/connexion_distance/xp/planMaisonProt1.png & 
 			sleep 0.5
-			eog $ESCAPE_RES/planMaisonProt2.png &
+			eog $ESCAPE_RES/img/connexion_distance/xp/planMaisonProt2.png &
 			echo "- Message reçu : Mission accomplie ..." # fin de l'escape game 
-			eog $ESCAPE_RES/textDeFeliciations4.gif &
+			eog $ESCAPE_RES/img/connexion_distance/xp/textDeFeliciations4.gif &
 			echo
 			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi 
 			menu_connexiond
@@ -113,16 +113,20 @@ function motDePasse()
 
 			sleep 0.2
 			echo "- Calendrier ELiot ALLARD"
-			eog $ESCAPE_RES/calendrier-Eliot.png &
+			eog $ESCAPE_RES/img/connexion_distance/caviar/calendrier-Eliot.png &
 			sleep 0.2
 			echo "- Carte visite restaurant"
-			eog $ESCAPE_RES/CarteVisiteRestaurant.png & 
+			eog $ESCAPE_RES/img/connexion_distance/caviar/CarteVisiteRestaurant.png & 
+
+			sleep 0.2
+			echo "- Affichage journal #3_2"
+			eog $ESCAPE_RES/img/connexion_distance/caviar/21_journal_3_2.jpg & 
 
 			user_wait_input "Appuyez sur [ENTREE] pour continuer ..."; if is_confirmed; then menu_connexiond; fi 
 
 			sleep 0.2
 			echo "- Note de la secretaire"
-			eog $ESCAPE_RES/24_note_du_secretaire.png & 
+			eog $ESCAPE_RES/img/connexion_distance/caviar/24_note_secretaire.jpg & 
 
 			echo
 			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi 
@@ -141,7 +145,7 @@ function motDePasse()
 						done
 			done
 			echo;echo
-			echo "$(e_error "Echec de connexion : ${bold}${red}${flashred}Connexion refusée !${reset}")" # echec normal
+			echo "$(e_error "Echec de connexion : ${bold}${red}${flashred}Connexion refusee !${reset}")" # echec normal
 			echo "$(e_error "Acces a distance ${bold}impossible ${reset}...")"
 			sleep $ESCAPE_SLEEPTIME_L
 
