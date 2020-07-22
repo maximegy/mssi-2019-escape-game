@@ -122,7 +122,7 @@ function lancement_timer()
 function lancement_simulation
 {
 	echo
-	e_warning "ATTENTION : Le timer va être réinitialiser !"
+	e_warning "ATTENTION : Le timer va etre REINITIALISE !"
 	user_confirmation "Voulez vous vraiment lancer la simulation ?"
 	if is_confirmed; then 
 		
@@ -184,7 +184,7 @@ function reprise_simulation()
 function validation_donnees
 {
 	clear
-	echo "Validation des données ..."
+	echo "Validation des donnees ..."
 	echo
 	
 	#Constantes

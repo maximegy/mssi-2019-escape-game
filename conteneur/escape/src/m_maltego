@@ -20,7 +20,7 @@ function main()
 function menu_maltego
 {
 	echo ""
-	e_error "Erreur: L'interface n'est pas encore crée"
+	e_error "Erreur: L'interface n'est pas encore creee"
 	user_wait_input "Appuyez sur une touche pour revenir au menu precedent"; if is_confirmed; then $ESCAPE_SRC/m_principal; fi 
 	exit 0
 }

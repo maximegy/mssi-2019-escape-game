@@ -82,7 +82,7 @@ function demarage_poste()
 	echo ""
     echo "                        __ ATTENTION __                         "
     echo "                                                                "
-    echo "                   VOUS N'ÊTES PAS ${bold}$hackerName${reset}                 "
+    echo "                   VOUS N'ETES PAS ${bold}$hackerName${reset}                 "
     echo "                TOUS LES FICHIERS SERONT ${bold}$(e_flash "SUPPRIMES")              "
     echo "                       DANS $timer Minutes                       "
     echo

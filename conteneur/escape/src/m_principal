@@ -23,10 +23,10 @@ function menu_principal()
 
 	echo ""
 	echo "1 : Voir la boite mail"
-	echo "2 : Voir le fichier du récupérateur de données [maltego]"
+	echo "2 : Voir l'extract du recuperateur de donnees [maltego]"
 	echo "3 : Voir les pages du journal"
 	echo "4 : Voir les connexions a distance"
-	echo "5 : Débloquage de fonctionalités cachées"
+	echo "5 : Debloquage de fonctionalités cachees"
 	echo ""
 	echo "======================================"
 	echo -n "Faites un choix : "
