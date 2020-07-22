@@ -21,7 +21,7 @@ function main()
 	#menu_mail # plus besoin si uniquement la boite de reception
 	
 	if [ "$ESCAPE_EXPORTVAR_MAIL" == "" ]; then 
-		echo "- Affichage des pages de journals #2"
+		echo "- Affichage des pages du journal #2"
 		eog $ESCAPE_RES/img/mailjournal/19_journal_2_3.png &
 		sleep 0.5
 		eog $ESCAPE_RES/img/mailjournal/19_journal_2_2.png &

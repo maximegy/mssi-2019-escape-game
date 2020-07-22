@@ -122,7 +122,7 @@ function lancement_timer()
 function lancement_simulation
 {
 	echo
-	e_warning "ATTENTION : Le timer va etre REINITIALISE !"
+	e_warning "ATTENTION : Le timer va etre REINITIALISEE !"
 	user_confirmation "Voulez vous vraiment lancer la simulation ?"
 	if is_confirmed; then 
 		
