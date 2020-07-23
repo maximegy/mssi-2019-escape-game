@@ -50,32 +50,35 @@ function menu_admin()
 	if [ "$choix" == "1" ] ; then
 		lancement_simulation
 		menu_admin
-
+	fi
 	#elif [ "$choix" == "2" ] ; then
     #	reprise_simulation
     #	menu_admin
 
 	#DEBUG BYPASS HIDDEN FUNCTIONS
-	elif [ "$choix" == "m_principal" ] ; then
-		$ESCAPE_SRC/m_principal
-	elif [ "$choix" == "m_mail" ] ; then
-		$ESCAPE_SRC/m_mail
-	elif [ "$choix" == "m_connexiond" ] ; then
-		$ESCAPE_SRC/m_connexiond
-	elif [ "$choix" == "m_journal" ] ; then
-		$ESCAPE_SRC/m_journal
-	elif [ "$choix" == "m_maltego" ] ; then
-		$ESCAPE_SRC/m_maltego
-	elif [ "$choix" == "m_mdp" ] ; then
-		$ESCAPE_SRC/m_mdp
-	elif [ "$choix" == "timer" ] ; then
-		lancement_timer
-	elif [ "$choix" == "code" ] ; then
-		$ESCAPE_SRC/m_code
+	if [ "$ESCAPE_DEBUG" == "ON" ]; then
+		if [ "$choix" == "m_principal" ] ; then
+			$ESCAPE_SRC/m_principal
+		elif [ "$choix" == "m_mail" ] ; then
+			$ESCAPE_SRC/m_mail
+		elif [ "$choix" == "m_connexiond" ] ; then
+			$ESCAPE_SRC/m_connexiond
+		elif [ "$choix" == "m_journal" ] ; then
+			$ESCAPE_SRC/m_journal
+		elif [ "$choix" == "m_maltego" ] ; then
+			$ESCAPE_SRC/m_maltego
+		elif [ "$choix" == "m_mdp" ] ; then
+			$ESCAPE_SRC/m_mdp
+		elif [ "$choix" == "timer" ] ; then
+			lancement_timer
+		elif [ "$choix" == "code" ] ; then
+			$ESCAPE_SRC/m_code
+		fi
+	fi
+
 	#elif [ "$choix" == "m_mdp" ] ; then
 
-	#DEBUG ONLY
-	elif [ "$choix" == "I" ] ; then
+	if [ "$choix" == "I" ] ; then
 		validation_donnees
 			
 	elif [ "$choix" == "R" ] ; then
