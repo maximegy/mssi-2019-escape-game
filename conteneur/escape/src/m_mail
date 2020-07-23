@@ -42,7 +42,6 @@ function menu_mail()
 	echo "1: Boite de reception"
 	echo "2: Boite d'envois"
 	echo
-	echo "j: Revoir les pages du journal"
 	echo "q: Quitter cet ecran et revenir au precedent"
 	echo "======================================"
 	echo -n "Faites un choix : "
@@ -129,6 +128,7 @@ function affichageMail_envois()
 		echo "Affichage du mail"
 		sleep 0.5
 		eog $nomFichier &
+		sleep 1
 		eog $ESCAPE_RES/img/mail/envoi/journal/19_journal_2_2_1.png
 	fi
 
