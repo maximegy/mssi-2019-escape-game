@@ -50,6 +50,7 @@ function menu_connexiond
 			eog $ESCAPE_RES/img/win/mail_transaction.png &
 			eog $ESCAPE_RES/img/win/transaction.png &
 			bash -c "xfce4-terminal --geometry 56x16+700+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/win" &
+		fi
 		$ESCAPE_SRC/m_principal
 	else
 		echo
