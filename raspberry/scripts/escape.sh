@@ -230,6 +230,7 @@ echo "Installation des Scripts"
 scriptwait="/home/pi/wait.sh"
 scriptopen="/home/pi/opensession.sh"
 echo "-> Script Wait.sh pour informer le joueur du verrouillage de session car la clé n'a pas été branchée"
+if [ ! -e $scriptwait ]; then
 cat > $scriptwait <<EOF
 #!/bin/bash
 DeviceIdFile=/home/pi/Device.id
@@ -307,9 +308,13 @@ sleep 1
 done;
 EOF
 chmod +x $scriptwait
-
+echo "script généré"
+else
+echo "le script existe déjà"
+fi
 
 echo "-> Script opensession.sh pour informer le joueur du déverrouillage de session"
+if [ ! -e $scriptopen ]; then
 cat > $scriptopen <<EOF
 #!/bin/bash
 while true; do
@@ -344,6 +349,10 @@ while true; do
 done
 EOF
 chmod +x $scriptopen
+echo "le script a été généré"
+else
+echo " le script existe déjà"
+fi
 
 
 echo ""
@@ -366,40 +375,73 @@ fi
 echo "L'empreinte de la clé a été enregistrée"
 
 DeviceId=`cat $DeviceIdFile`
+clear
 echo "La machine se verrouillera automatiquement si"
 echo "Le périphérique que vous avez configué ($DeviceId) n'est pas branché"
-echo "Pour poursuivre, retirez la clé et appuyez sur la touche [entrée], la machine va automatiquement se verrouiller"
 read plop
 
 i=0
 
 while true; do
-clear
-if [ $i == 0 ]; then
-    echo "Lancement du script"
-    i=1
-else
-    echo "Pour relancer, retirez la clé USB et appuyez sur [entrer]"
-    echo "Si c'est la fin de l'escape game quittez cette fenêtre et éteignez la machine."
-    read plop
-fi
+    clear
+    echo "#################@ MENU PRINCIPAL @#################"
+    echo
+    echo "          Lancer le script ------------- 1"
+    echo "          Changer de clé USB ----------- 2"
+    echo "          Quitter ---------------------- Q"
+    echo
+    echo -n " Votre choix : "
 
-lxterminal --geometry=238x64 -e ./wait.sh
+    read choix
 
-#Boucle tant que le script est actif pour vérifier la présence de votre périphérique
-i=0
-while [ $i = 0 ]; do
-	sleep 0.2
-	# Si périphérique est branché
-	if [ `lsusb | grep $DeviceId | wc -l | xargs` == "1" ]; then
-		echo "ok"
-		lxterminal --geometry=238x64 -e ./opensession.sh
-		vncviewer -config /home/pi/pc-hacker.vnc
-		i=1
-	else
-               echo "Verrouillage de la session"
-               xscreensaver-command -lock
-	fi
+    case $choix in
+    1)
+        echo "                  /!\ ATTENTION /!\ " 
+        echo "              Avant de lancer le script"
+        echo "                débranchez la clé USB"
+        echo "        La session se verrouillera toute seule"
+        echo
+        echo -n "Appuyez sur [Entrer] une fois que vous avez débranché la clé"
+        read
+        clear
+        echo "Lancement du script"
+        #Boucle tant que le script est actif pour vérifier la présence de votre périphérique
+        lxterminal --geometry=238x64 -e ./wait.sh
+        j=0
+        while [ "$j" == "0" ]; do
+            sleep 0.2
+            # Si périphérique est branché
+            if [ `lsusb | grep $DeviceId | wc -l | xargs` == "1" ]; then
+                echo "ok"
+                lxterminal --geometry=238x64 -e ./opensession.sh
+                vncviewer -config /home/pi/pc-hacker.vnc
+                j=1
+                pkill wait
+                pkill opensession
+            else
+                    echo "Verrouillage de la session"
+                    xscreensaver-command -lock
+            fi
+        done;
+    ;;
+    2)
+        echo "Changement de clé USB :"
+        echo  -e "-> Débranchez votre périphérique de l'ordinateur, et appuyez sur [entrée]"
+        read plop
+        lsusb > /tmp/plop1
+        echo " -> Rebranchez votre périphérique à l'ordinateur, et appuyez sur [entrée]"
+        read plop
+        lsusb > /tmp/plop2
+        echo `diff /tmp/plop1 /tmp/plop2 | tail -n1 | cut -d' ' -f7` > $DeviceIdFile
+        DeviceId=`cat $DeviceIdFile`
+        echo
+        echo "Votre nouvelle clé ($DeviceId) a été enregistrée"
+        echo "Elle sera utilisée pour verrouiller la machine"
+        echo "Appuyez sur [Entrer] pour revenir au menu Principal"
+        read
+    ;;
+    [qQ] )
+        break
+    ;;
+    esac
 done;
-kill $(ps -edf | grep wait.sh)
-kill $(ps -edf | grep opensession.sh)
