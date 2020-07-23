@@ -126,7 +126,7 @@ function motDePasse()
 			sleep 1
 			eog $ESCAPE_RES/img/win/transaction.png &
 			sleep 1
-			bash -c "xfce4-terminal --geometry 56x16+700+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/win" &
+			bash -c "xfce4-terminal --geometry 56x19+700+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/win" &
 			menu_connexiond
 
 		fi
