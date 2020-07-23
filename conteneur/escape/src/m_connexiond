@@ -108,18 +108,18 @@ function motDePasse()
 			sleep 0.5
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/planMaisonProt2.png &
 			sleep 0.5
-			echo "- Affichage des études thermiques"
+			echo "- Affichage des etudes thermiques"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/calcul_thermique.png & 
 			sleep 0.5
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/echange_thermique.jpg &
 			sleep 0.5
-			echo "- Affichage de la découpe du mur"
+			echo "- Affichage de la decoupe du mur"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/decoupe_mur.png & 
 			sleep 0.5
 			echo "- Affichage du descriptif de la maison"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/descriptif_maison.jpg & 
 			sleep 0.5
-			echo "- Affichage draft slide présentation nouveau produit"
+			echo "- Affichage draft slide presentation nouveau produit"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/presentation_nouveau_produit.png &
 
 			echo
@@ -163,7 +163,7 @@ function motDePasse()
 		if [ "$1" == "10.2.145.155" ] ; then 
 			chars="/-\|"
 			echo
-			for i in {1..20}
+			for i in {1..5}
 			 do
 						for (( i=0; i<${#chars}; i++ )); do
 							sleep 0.1
@@ -174,7 +174,7 @@ function motDePasse()
 			e_success "Connexion a la machine OK !"
 			e_warning2 "Connexion au reseau de management ..."
 			echo
-			for i in {1..20}
+			for i in {1..10}
 			 do
 						for (( i=0; i<${#chars}; i++ )); do
 							sleep 0.1
