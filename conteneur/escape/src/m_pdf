@@ -1,0 +1,96 @@
+#!/bin/bash
+
+#+--------------------------------------------------------------------------------+
+#| Version : V0.1                                                                 |
+#| Description : Script de menu pour entrer un code afin de debloqué              |
+#| 					des fonctionalitées cachées                                   |
+#| Auteur : CESI MSSI 2019 [Maxence Serment]                                      |
+#| Date : 24-06-20                                                                |
+#+--------------------------------------------------------------------------------+
+#~
+
+source $ESCAPE_UTIL
+
+function main()
+{
+	password=$(read_settings pass_crackpdf)	
+	menu_pdf
+}
+
+# Menu principal du script
+function menu_pdf()
+{
+
+	clear
+	e_header "MENU PDF CRACKER"
+
+	echo
+	echo "Lancement de l'application ..."
+	sleep $ESCAPE_SLEEPTIME_M
+	echo
+	echo "${tan}$(e_flash "Un mot de passe est requis")"
+	user_confirmation "Voulez vous continuer ?"
+	if is_confirmed; then 
+		e_warning "Entrez 'q' pour quitter cet ecran et revenir au precedent"
+		echo
+		motDePasse $1
+	else 
+		echo
+		echo -n "Fermeture de l'application ..."
+		sleep $ESCAPE_SLEEPTIME_M
+	 	$ESCAPE_SRC/m_principal
+	fi
+
+}
+
+function motDePasse
+{
+	echo -n "mot de passe : "
+	read choix
+
+	if [ "$choix" == "$password" ] ; then
+		#Password is valid !	
+		e_success "Le mot de passe est valide !"
+		echo 
+		echo "Lancement application OK"
+		e_warning2 "Decryptage des fichiers en cours ..."
+		echo
+		sleep 1
+		chargement 
+
+		# mail chiffré et liste RH
+		echo "Affichage liste RH dechifre"
+		eog $ESCAPE_RES/img/pdf_crack/27-liste_rh_dechiffre.png &
+		sleep 0.5
+
+		echo "Affichage mail_piege"
+		eog $ESCAPE_RES/img/pdf_crack/mail_piege.png &
+
+		user_wait_input "Appuyez sur [ENTREE] pour revenir au menu principal"; if is_confirmed; then echo "Fermeture de l'application ..."; sleep $ESCAPE_SLEEPTIME_M; $ESCAPE_SRC/m_principal; fi
+		
+		$ESCAPE_SRC/m_principal
+
+	elif [ "$choix" == "q" ] ; then
+		echo "Fermeture de l'application ..."
+		sleep $ESCAPE_SLEEPTIME_M
+		$ESCAPE_SRC/m_principal
+	else
+		e_error "Erreur : Le mot de passe est incorrect"
+		sleep $ESCAPE_SLEEPTIME_M
+		motDePasse
+	fi
+}
+
+function chargement()
+{
+	for load in $(seq 1 100); do
+		rand=$(shuf -i 1-99999 -n 1)
+		echo -ne "[$load %] - decrypte ...\r"
+		sleep 0.$rand
+	done
+	#echo "100"
+	echo "Fichiers decryptes !  "	
+	sleep 2
+}
+
+main

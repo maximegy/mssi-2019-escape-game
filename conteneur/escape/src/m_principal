@@ -41,7 +41,7 @@ function menu_principal()
 	elif [ "$choix" == "4" ] ; then
 		menu_connexion
 	elif [ "$choix" == "5" ] ; then
-		menu_code
+		menu_pdfCrack
 	else
 		echo
 		echo -n $(e_warning "Veuillez selectionner un des choix du menu ")
@@ -67,8 +67,8 @@ function menu_connexion
 {
 	$ESCAPE_SRC/m_connexiond
 }
-function menu_code
+function menu_pdfCrack
 {
-	$ESCAPE_SRC/m_code
+	$ESCAPE_SRC/m_pdf
 }
 main
