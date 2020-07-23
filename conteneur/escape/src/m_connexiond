@@ -48,6 +48,7 @@ function menu_connexiond
 		if [ "$win" == "true" ]; then
 			pkill timer
 			eog $ESCAPE_RES/img/win/mail_transaction.png &
+			sleep 1
 			eog $ESCAPE_RES/img/win/transaction.png &
 			bash -c "xfce4-terminal --geometry 56x16+700+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/win" &
 		fi
@@ -119,7 +120,8 @@ function motDePasse()
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/descriptif_maison.jpg & 
 			sleep 3
 			echo "- Affichage draft slide présentation nouveau produit"
-			eog $ESCAPE_RES/img/connexion_distance/xp/content/descriptif_maison.jpg & 
+			eog $ESCAPE_RES/img/connexion_distance/xp/content/presentation_nouveau_produit.png &
+			sleep 0.2
 
 			echo
 			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"
