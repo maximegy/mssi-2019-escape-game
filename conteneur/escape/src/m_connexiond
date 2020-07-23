@@ -45,6 +45,13 @@ function menu_connexiond
 	elif [ "$choix" == "3" ] ; then
 		connexionServeur "10.2.145.155 - POSTE DE BOURGEAU"
 	elif [ "$choix" == "q" ] ; then
+		if [ "$win" == "true" ]; then
+			pkill -STOP timer # Freeze le timer 
+			eog $ESCAPE_RES/img/win/mail_transaction.png &
+			sleep 1
+			eog $ESCAPE_RES/img/win/transaction.png &
+			bash -c "xfce4-terminal --geometry 76x16+700+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/win" &
+		fi
 		$ESCAPE_SRC/m_principal
 	else
 		echo
@@ -100,21 +107,20 @@ function motDePasse()
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/planMaisonProt1.png & 
 			sleep 0.5
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/planMaisonProt2.png &
-			sleep 3
+			sleep 0.5
 			echo "- Affichage des etudes thermiques"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/calcul_thermique.png & 
 			sleep 0.5
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/echange_thermique.jpg &
-			sleep 3
+			sleep 0.5
 			echo "- Affichage de la decoupe du mur"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/decoupe_mur.png & 
-			sleep 1
+			sleep 0.5
 			echo "- Affichage du descriptif de la maison"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/descriptif_maison.jpg & 
-			sleep 3
+			sleep 0.5
 			echo "- Affichage draft slide presentation nouveau produit"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/presentation_nouveau_produit.png &
-			sleep 0.2
 
 			pkill timer; pkill chat
 			echo
