@@ -12,7 +12,8 @@ source $ESCAPE_UTIL
 
 function main()
 {
-	e_warning2 "Lancement de l'interface maltego ..."
+	clear
+	e_warning2 "Ouverture de l'extract Maltego ..."
 	sleep 1
 	menu_maltego
 }
