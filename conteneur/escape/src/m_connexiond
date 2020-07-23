@@ -60,7 +60,7 @@ function connexionServeur()
 
 	clear
 	e_header "CONNEXION A DISTANCE"
-	echo "Connexion au serveur $1 ..."
+	echo "Connexion a la machine $1 ..."
 	sleep $ESCAPE_SLEEPTIME_M
 	echo
 	echo "Attention : "${tan}$(e_flash "Un mot de passe")" est necessaire pour cette connexion"
@@ -91,7 +91,7 @@ function motDePasse()
 	if [ "$choix" == "$password" ] ; then
 		#Password is valid !	
 		e_success "Le mot de passe est valide !"
-		e_warning2 "Connexion à la machine ..."
+		e_warning2 "Connexion a la machine ..."
 
 		# Connexion 10.2.114.29  : XP
 		if [ "$1" == "10.2.114.29" ] ; then 
@@ -146,7 +146,7 @@ function motDePasse()
 						done
 			done
 			echo;echo
-			e_success "Connexion à la machine OK !"
+			e_success "Connexion a la machine OK !"
 			e_warning2 "Connexion au réseau de management ..."
 			echo
 			for i in {1..20}
