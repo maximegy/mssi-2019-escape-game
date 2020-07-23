@@ -45,6 +45,13 @@ function menu_connexiond
 	elif [ "$choix" == "3" ] ; then
 		connexionServeur "10.2.145.155 - POSTE DE BOURGEAU"
 	elif [ "$choix" == "q" ] ; then
+		if [ "$win" == "true" ]; then
+			pkill timer
+			eog $ESCAPE_RES/img/win/mail_transaction.png &
+			sleep 1
+			eog $ESCAPE_RES/img/win/transaction.png &
+			bash -c "xfce4-terminal --geometry 56x16+700+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/win" &
+		fi
 		$ESCAPE_SRC/m_principal
 	else
 		echo
@@ -113,7 +120,8 @@ function motDePasse()
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/descriptif_maison.jpg & 
 			sleep 3
 			echo "- Affichage draft slide présentation nouveau produit"
-			eog $ESCAPE_RES/img/connexion_distance/xp/content/descriptif_maison.jpg & 
+			eog $ESCAPE_RES/img/connexion_distance/xp/content/presentation_nouveau_produit.png &
+			sleep 0.2
 
 			echo
 			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"
@@ -121,6 +129,7 @@ function motDePasse()
 			sleep 1
 			eog $ESCAPE_RES/img/connexion_distance/xp/sortie/39_journal_7.png &
 			echo "7;39 Journal 7;$ESCAPE_RES/img/journaux/39_journal_7/39_journal_7.png" >> /tmp/journaux
+			export win=true
 			menu_connexiond
 
 		fi
@@ -164,7 +173,7 @@ function motDePasse()
 			done
 			echo;echo
 			e_success "Connexion a la machine OK !"
-			e_warning2 "Connexion au réseau de management ..."
+			e_warning2 "Connexion au reseau de management ..."
 			echo
 			for i in {1..20}
 			 do
@@ -182,10 +191,10 @@ function motDePasse()
 			sleep $ESCAPE_SLEEPTIME_L
 
 			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi
+			eog $ESCAPE_RES/img/connexion_distance/bourgeau/sortie/31_photo_mariage_2.png &
+			sleep 1
 			eog $ESCAPE_RES/img/connexion_distance/bourgeau/sortie/30_journal_5.png &
 			echo "6;30 Journal 5;$ESCAPE_RES/img/journaux/30_journal_5/30_journal_5.png" >> /tmp/journaux
-			sleep 1
-			eog $ESCAPE_RES/img/connexion_distance/bourgeau/sortie/31_photo_mariage_2.png &
 			menu_connexiond
 		fi
 

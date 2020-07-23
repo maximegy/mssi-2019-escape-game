@@ -1,0 +1,21 @@
+source $ESCAPE_UTIL
+
+while true; do
+    clear
+    echo "#     # ###  #####  ####### ####### ### ######  ####### "
+    echo "#     #  #  #     #    #    #     #  #  #     # #       "
+    echo "#     #  #  #          #    #     #  #  #     # #       "
+    echo "#     #  #  #          #    #     #  #  ######  #####   "
+    echo " #   #   #  #          #    #     #  #  #   #   #       "
+    echo "  # #    #  #     #    #    #     #  #  #    #  #       "
+    echo "   #    ###  #####     #    ####### ### #     # ####### "
+    echo ""
+    e_success " Vous avez gagné."
+    echo " Vous avez la Preuve que : "
+    echo "    * Natasha a vole le prototype"
+    echo "    * Amaton est bien le destinataire de ce vol"
+    echo ""
+    echo " Vous savez maintenant comment l'attaque s'est deroulee."
+    e_success " Félécitations et merci d'avoir joué."
+    sleep 100
+done
