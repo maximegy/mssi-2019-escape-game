@@ -91,7 +91,7 @@ function motDePasse()
 	if [ "$choix" == "$password" ] ; then
 		#Password is valid !	
 		e_success "Le mot de passe est valide !"
-		e_warning2 "Connexion au serveur ..."
+		e_warning2 "Connexion à la machine ..."
 
 		# Connexion 10.2.114.29  : XP
 		if [ "$1" == "10.2.114.29" ] ; then 
@@ -146,11 +146,29 @@ function motDePasse()
 						done
 			done
 			echo;echo
+			e_success "Connexion à la machine OK !"
+			e_warning2 "Connexion au réseau de management ..."
+			echo
+			for i in {1..20}
+			 do
+						for (( i=0; i<${#chars}; i++ )); do
+							sleep 0.1
+							echo -en "${chars:$i:1}" "\r"
+						done
+			done
+			echo ""
 			echo "$(e_error "Echec de connexion : ${bold}${red}${flashred}Connexion refusee !${reset}")" # echec normal
 			echo "$(e_error "Acces a distance ${bold}impossible ${reset}...")"
+			echo "$(e_error "Multi Authentification requise...")"
+			eog $ESCAPE_RES/img/connexion_distance/bourgeau/content/2fa.png &
+
 			sleep $ESCAPE_SLEEPTIME_L
 
-			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi 
+			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi
+			eog $ESCAPE_RES/img/connexion_distance/bourgeau/sortie/30_journal_5.png &
+			echo "6;30 Journal 5;$ESCAPE_RES/img/journaux/30_journal_5/30_journal_5.png" >> /tmp/journaux
+			sleep 1
+			eog $ESCAPE_RES/img/connexion_distance/bourgeau/sortie/31_photo_mariage_2.png &
 			menu_connexiond
 		fi
 
