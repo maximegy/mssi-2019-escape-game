@@ -124,15 +124,16 @@ function affichageMail_envois()
 	echo
 
 	# Affiche le mail 
-	if [ $numero == "1" ]; then nomFichier=$ESCAPE_RES/img/mail/envoi/19_journal_2_2_1.png; fi
-	
-	echo "Affichage d'une page de journal #2.2.1"
-	eog $nomFichier & 
-	sleep 0.5
-
+	if [ $numero == "1" ]; then
+		nomFichier=$ESCAPE_RES/img/mail/envoi/emailBoiteEnvoi.png
+		echo "Affichage du mail"
+		sleep 0.5
+		eog $nomFichier &
+		eog $ESCAPE_RES/img/mail/envoi/journal/19_journal_2_2_1.png
+	fi
 
 	#cat $nomFichier
-	user_wait_input "Appuyez sur une touche pour revenir au menu precedent"; if is_confirmed; then menu_reception; fi 
+	user_wait_input "Appuyez sur une touche pour revenir au menu precedent"; if is_confirmed; then menu_reception; fi
 	menu_envois
 }
 
