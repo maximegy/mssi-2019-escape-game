@@ -46,7 +46,7 @@ function menu_connexiond
 		connexionServeur "10.2.145.155 - POSTE DE BOURGEAU"
 	elif [ "$choix" == "q" ] ; then
 		if [ "$win" == "true" ]; then
-			pkill timer
+			pkill -STOP timer # Freeze le timer 
 			eog $ESCAPE_RES/img/win/mail_transaction.png &
 			sleep 1
 			eog $ESCAPE_RES/img/win/transaction.png &
