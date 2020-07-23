@@ -53,10 +53,12 @@ function motDePasse
 		e_success "Le mot de passe est valide !"
 		echo 
 		echo "Lancement application OK"
-		e_warning2 "Decryptage des fichiers en cours ..."
-		echo
-		sleep 1
-		chargement 
+		if [ "$decrypt" != "true" ]; then
+			e_warning2 "Decryptage des fichiers en cours ..."
+			echo
+			sleep 1
+			chargement 
+		fi
 
 		# mail chiffré et liste RH
 		echo "Affichage liste RH dechifre"
@@ -91,6 +93,7 @@ function chargement()
 	#echo "100"
 	echo "Fichiers dechiffres !  "	
 	sleep 2
+	export decrypt=true
 }
 
 main
