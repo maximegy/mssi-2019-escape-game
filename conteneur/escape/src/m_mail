@@ -167,7 +167,7 @@ function menu_envois()
 
 	else
 		echo
-		echo -n $(e_warning "Veuillez selectionner un des choix du menu. [chiffre de 1 a 5]")
+		echo -n $(e_warning "Veuillez selectionner un des choix du menu.")
 		sleep $ESCAPE_SLEEPTIME_M
 		menu_envois
 	fi
