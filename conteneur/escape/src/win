@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source $ESCAPE_UTIL
 
 while true; do
