@@ -45,13 +45,6 @@ function menu_connexiond
 	elif [ "$choix" == "3" ] ; then
 		connexionServeur "10.2.145.155 - POSTE DE BOURGEAU"
 	elif [ "$choix" == "q" ] ; then
-		if [ "$win" == "true" ]; then
-			pkill -STOP timer # Freeze le timer 
-			eog $ESCAPE_RES/img/win/mail_transaction.png &
-			sleep 1
-			eog $ESCAPE_RES/img/win/transaction.png &
-			bash -c "xfce4-terminal --geometry 76x16+700+500 --hide-borders --hide-menubar --hide-toolbar --hide-scrollbar -x $ESCAPE_SRC/win" &
-		fi
 		$ESCAPE_SRC/m_principal
 	else
 		echo
@@ -122,7 +115,7 @@ function motDePasse()
 			echo "- Affichage draft slide presentation nouveau produit"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/presentation_nouveau_produit.png &
 
-			pkill timer; pkill chat
+			pkill -STOP timer; pkill chat
 			echo
 			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"
 			eog $ESCAPE_RES/img/connexion_distance/xp/sortie/email_client_info.png & 
