@@ -107,21 +107,20 @@ function motDePasse()
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/planMaisonProt1.png & 
 			sleep 0.5
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/planMaisonProt2.png &
-			sleep 3
+			sleep 0.5
 			echo "- Affichage des études thermiques"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/calcul_thermique.png & 
 			sleep 0.5
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/echange_thermique.jpg &
-			sleep 3
+			sleep 0.5
 			echo "- Affichage de la découpe du mur"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/decoupe_mur.png & 
-			sleep 1
+			sleep 0.5
 			echo "- Affichage du descriptif de la maison"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/descriptif_maison.jpg & 
-			sleep 3
+			sleep 0.5
 			echo "- Affichage draft slide présentation nouveau produit"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/presentation_nouveau_produit.png &
-			sleep 0.2
 
 			echo
 			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"
