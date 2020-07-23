@@ -378,6 +378,7 @@ DeviceId=`cat $DeviceIdFile`
 clear
 echo "La machine se verrouillera automatiquement si"
 echo "Le périphérique que vous avez configué ($DeviceId) n'est pas branché"
+echo -n "Appuyer sur [Entrer] pour continuer"
 read plop
 
 i=0
