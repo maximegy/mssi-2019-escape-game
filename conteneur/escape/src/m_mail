@@ -102,9 +102,9 @@ function affichageMail_reception()
 	e_header "AFFICHAGE DU MAIL #$numero"
 
 	# Affiche le mail 
-	if [ $numero == "1" ]; then nomFichier=$ESCAPE_RES/img/mail/m1/17-email1.png; fi
-	if [ $numero == "2" ]; then nomFichier=$ESCAPE_RES/img/mail/m2/18-email2.png; fi
-	if [ $numero == "3" ]; then nomFichier=$ESCAPE_RES/img/mail/m3/19-email3.png; fi
+	if [ $numero == "1" ]; then nomFichier=$ESCAPE_RES/img/mail/reception/m1/17-email1.png; fi
+	if [ $numero == "2" ]; then nomFichier=$ESCAPE_RES/img/mail/reception/m2/18-email2.png; fi
+	if [ $numero == "3" ]; then nomFichier=$ESCAPE_RES/img/mail/reception/m3/19-email3.png; fi
 
 	#cat $nomFichier
 	eog $nomFichier &
