@@ -107,6 +107,8 @@ function affichageMail_reception()
 
 	#cat $nomFichier
 	eog $nomFichier &
+	sleep 1
+	if [ $numero == "1" ]; then eog $ESCAPE_RES/img/mail/reception/m1/journal/19_journal_2_2_2.png; fi
 	echo "==========================================="
 	echo
 	user_wait_input "Appuyez sur une touche pour revenir au menu precedent"; if is_confirmed; then menu_reception; fi
