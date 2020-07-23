@@ -85,11 +85,11 @@ function chargement()
 {
 	for load in $(seq 1 100); do
 		rand=$(shuf -i 1-99999 -n 1)
-		echo -ne "[$load %] - decrypte ...\r"
+		echo -ne "[$load %] - dechiffrement ...\r"
 		sleep 0.$rand
 	done
 	#echo "100"
-	echo "Fichiers decryptes !  "	
+	echo "Fichiers dechiffres !  "	
 	sleep 2
 }
 
