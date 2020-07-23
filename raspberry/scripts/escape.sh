@@ -3,6 +3,7 @@
 echo "Bonjour, bienvenue sur le pc de l'escape game."
 echo "Le script que vous avez lancé est conçu pour fonctionner sur Raspbian OS avec le moteur de Terminal LXTerminal"
 echo "Avant de lancer ce script, préparez une clé USB qui sera utilisée pour le jeu"
+echo -n "Appuyer sur [Entrer] pour continuer"
 read
 
 clear
@@ -397,6 +398,7 @@ while true; do
 
     case $choix in
     1)
+        clear
         echo "                  /!\ ATTENTION /!\ " 
         echo "              Avant de lancer le script"
         echo "                débranchez la clé USB"
