@@ -52,16 +52,6 @@ function menu_mail()
 		menu_reception
 	elif [ "$choix" == "2" ] ; then
 		menu_envois
-	elif [ "$choix" == "j" ] ; then
-		echo "- Affichage des pages de journals #2.1 #2.2 et #2.3"
-		sleep 0.5
-		eog $ESCAPE_RES/img/mailjournal/19_journal_2_3.png & 
-		sleep 0.5
-		eog $ESCAPE_RES/img/mailjournal/19_journal_2_2.png &
-		sleep 0.5
-		eog $ESCAPE_RES/img/mailjournal/19_journal_2_1.png &
-		user_wait_input "Appuyez sur ${bold}[ENTRER]${reset} pour continuer"; if is_confirmed; then menu_reception; fi 
-		menu_mail
 	elif [ "$choix" == "q" ] ; then
 		$ESCAPE_SRC/m_principal
 	else
