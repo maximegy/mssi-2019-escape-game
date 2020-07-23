@@ -127,8 +127,8 @@ function motDePasse()
 			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"
 			eog $ESCAPE_RES/img/connexion_distance/xp/sortie/email_client_final.png & 
 			sleep 1
-			eog $ESCAPE_RES/img/connexion_distance/xp/sortie/39_journal_7.png &
-			echo "7;39 Journal 7;$ESCAPE_RES/img/journaux/39_journal_7/39_journal_7.png" >> /tmp/journaux
+			eog $ESCAPE_RES/img/connexion_distance/xp/sortie/39_journal_7.jpg &
+			echo "7;39 Journal 7;$ESCAPE_RES/img/journaux/39_journal_7/39_journal_7.jpg" >> /tmp/journaux
 			export win=true
 			menu_connexiond
 
