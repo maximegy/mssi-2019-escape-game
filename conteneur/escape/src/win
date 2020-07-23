@@ -4,20 +4,21 @@ source $ESCAPE_UTIL
 
 while true; do
     clear
-    echo "#     # ###  #####  ####### ####### ### ######  ####### "
-    echo "#     #  #  #     #    #    #     #  #  #     # #       "
-    echo "#     #  #  #          #    #     #  #  #     # #       "
-    echo "#     #  #  #          #    #     #  #  ######  #####   "
-    echo " #   #   #  #          #    #     #  #  #   #   #       "
-    echo "  # #    #  #     #    #    #     #  #  #    #  #       "
-    echo "   #    ###  #####     #    ####### ### #     # ####### "
+    e_success "${flashred}#     # ###  #####  ####### ####### ### ######  ####### ${reset}"
+    e_success "${flashred}#     #  #  #     #    #    #     #  #  #     # #       ${reset}"
+    e_success "${flashred}#     #  #  #          #    #     #  #  #     # #       ${reset}"
+    e_success "${flashred}#     #  #  #          #    #     #  #  ######  #####   ${reset}"
+    e_success "${flashred} #   #   #  #          #    #     #  #  #   #   #       ${reset}"
+    e_success "${flashred}  # #    #  #     #    #    #     #  #  #    #  #       ${reset}"
+    e_success "${flashred}   #    ###  #####     #    ####### ### #     # ####### ${reset}"
     echo ""
-    e_success " Vous avez gagné."
-    echo " Vous avez la Preuve que : "
-    echo "    * Natasha a vole le prototype"
-    echo "    * Amaton est bien le destinataire de ce vol"
-    echo ""
+    e_success "                      Vous avez gagne ! "
+	echo;echo;echo;
+    echo " Vous avez la preuve que : "
+    echo " ${bold}* Natasha a vole le prototype${reset}"
+    echo " ${bold}* Amaton est bien le destinataire de ce vol${reset}"
+    echo
     echo " Vous savez maintenant comment l'attaque s'est deroulee."
-    e_success " Félécitations et merci d'avoir joué."
+    e_success " Felicitations et merci d'avoir joue :)"
     sleep 100
 done
