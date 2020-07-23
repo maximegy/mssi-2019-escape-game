@@ -88,7 +88,7 @@ function menu_admin()
 		
 	elif [ "$choix" == "K" ] ; then
 		e_warning2 "Kill all processes ..."
-		pkill timer; pkill boot; pkill chat; pkill eog
+		pkill timer; pkill boot; pkill win; pkill chat; pkill eog
 		pkill cronlauncher
 		e_success "OK"
 		menu_admin
