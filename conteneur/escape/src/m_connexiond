@@ -96,14 +96,31 @@ function motDePasse()
 		# Connexion 10.2.114.29  : XP
 		if [ "$1" == "10.2.114.29" ] ; then 
 			sleep $ESCAPE_SLEEPTIME_M
-			echo "- Affichage des prototypes 1 & 2 ..."
-			eog $ESCAPE_RES/img/connexion_distance/xp/planMaisonProt1.png & 
+			echo "- Affichage des plans 1 & 2 ..."
+			eog $ESCAPE_RES/img/connexion_distance/xp/content/planMaisonProt1.png & 
 			sleep 0.5
-			eog $ESCAPE_RES/img/connexion_distance/xp/planMaisonProt2.png &
-			echo "- Message reçu : Mission accomplie ..." # fin de l'escape game 
-			eog $ESCAPE_RES/img/connexion_distance/xp/textDeFeliciations4.gif &
+			eog $ESCAPE_RES/img/connexion_distance/xp/content/planMaisonProt2.png &
+			sleep 3
+			echo "- Affichage des études thermiques"
+			eog $ESCAPE_RES/img/connexion_distance/xp/content/calcul_thermique.png & 
+			sleep 0.5
+			eog $ESCAPE_RES/img/connexion_distance/xp/content/echange_thermique.png &
+			sleep 3
+			echo "- Affichage de la découpe du mur"
+			eog $ESCAPE_RES/img/connexion_distance/xp/content/decoupe_mur.png & 
+			sleep 1
+			echo "- Affichage du descriptif de la maison"
+			eog $ESCAPE_RES/img/connexion_distance/xp/content/descriptif_maison.jpg & 
+			sleep 3
+			echo "- Affichage draft slide présentation nouveau produit"
+			eog $ESCAPE_RES/img/connexion_distance/xp/content/descriptif_maison.jpg & 
+
 			echo
-			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"; if is_confirmed; then menu_connexiond; fi 
+			user_wait_input "Appuyez sur [ENTREE] pour revenir au menu precedent"
+			eog $ESCAPE_RES/img/connexion_distance/xp/sortie/email_client_final.png & 
+			sleep 1
+			eog $ESCAPE_RES/img/connexion_distance/xp/sortie/39_journal_7.png &
+			echo "7;39 Journal 7;$ESCAPE_RES/img/journaux/39_journal_7/39_journal_7.png" >> /tmp/journaux
 			menu_connexiond
 
 		fi
