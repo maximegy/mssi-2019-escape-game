@@ -104,7 +104,7 @@ function motDePasse()
 			echo "- Affichage des études thermiques"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/calcul_thermique.png & 
 			sleep 0.5
-			eog $ESCAPE_RES/img/connexion_distance/xp/content/echange_thermique.png &
+			eog $ESCAPE_RES/img/connexion_distance/xp/content/echange_thermique.jpg &
 			sleep 3
 			echo "- Affichage de la découpe du mur"
 			eog $ESCAPE_RES/img/connexion_distance/xp/content/decoupe_mur.png & 
