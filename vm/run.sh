@@ -93,6 +93,7 @@ while true; do
     echo "                Redémarrer le conteneur -------------------- : 3"
     echo "                Télécharger la dernière image -------------- : 4"
     echo "                Arrêter et supprimer le conteneur ---------- : 5"
+    echo "                Se connecter au cron launcher -------------- : 6"
     echo "                Quitter ------------------------------------ : Q"
     read choix
 
@@ -125,6 +126,10 @@ while true; do
         docker stop pc-hacker
         echo "Suppression du conteneur"
         docker rm pc-hacker
+    ;;
+    6) # Connection au cronlauncher
+        echo "** Connection au cronlauncher ...  **"
+        docker exec -it pc-hacker bash -c 'echo $(tty) > /tmp/TTY_CRON && chown kali:kali /tmp/TTY_CRON && chown kali:kali $(tty) && bash'
     ;;
     [qQ] )
         echo "Aurevoir"
