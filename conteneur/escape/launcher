@@ -144,6 +144,14 @@ function lancement_simulation
 			rm -rf $ESCAPE_TMP/timer.tmp
 		fi
 
+		#reset journeaux
+		echo $(ls -l /tmp/journaux)
+		if [ -f /tmp/journaux ] ; then
+			rm /tmp/journaux
+		fi
+		echo $(ls -l /tmp/journaux)
+		read
+
 		#kill timer if any
 		#echo $currentTimerPID
 		#kill $currentTimerPID
