@@ -13,7 +13,7 @@ source $ESCAPE_UTIL
 function main()
 {
 	clear
-	e_warning2 "Ouverture de l'extract Maltego ..."
+	e_warning "Ouverture de l'extract Maltego ..."
 	sleep 1
 	menu_maltego
 }
