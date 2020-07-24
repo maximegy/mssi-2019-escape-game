@@ -42,19 +42,22 @@ do
 	if [ -e $hackerScript ]; then 
 		#lancement de la simulation 
 		#bash -c "gnome-terminal -- $srcDir/boot" & 
+		pkill boot
 		bash -c "xfce4-terminal --geometry +0+0 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"HACKER PC\" -x $ESCAPE_SRC/boot" & 
 	fi
 
 	if [ -e $timerScript ]; then 
 		#lancement du timer 
 		#bash -c "gnome-terminal -- $srcDir/timer" & 
-	bash -c "xfce4-terminal --geometry +1400+20 --hide-menubar --hide-toolbar --hide-scrollbar --title=TIMER -x $ESCAPE_SRC/timer" & 
+		pkill boot
+		bash -c "xfce4-terminal --geometry +1400+20 --hide-menubar --hide-toolbar --hide-scrollbar --title=TIMER -x $ESCAPE_SRC/timer" & 
 	fi
 
 	if [ -e $chatScript ]; then 
 		#lancement du timer 
 		#bash -c "gnome-terminal -- $srcDir/timer" & 
-	bash -c "xfce4-terminal --geometry 60x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
+		pkill boot
+		bash -c "xfce4-terminal --geometry 60x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
 	fi
 	sleep 1
 done
