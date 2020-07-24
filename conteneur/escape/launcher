@@ -127,6 +127,7 @@ function lancement_simulation
 {
 	echo
 	e_warning "ATTENTION : Le timer va etre REINITIALISEE !"
+	e_warning "ATTENTION : Le fichier journal va etre REINITIALISEE !"
 	user_confirmation "Voulez vous vraiment lancer la simulation ?"
 	if is_confirmed; then 
 		
@@ -145,9 +146,12 @@ function lancement_simulation
 		fi
 
 		#reset journeaux
+		echo $(ls -l /tmp/journaux)
 		if [ -f /tmp/journaux ] ; then
 			rm /tmp/journaux
 		fi
+		echo $(ls -l /tmp/journaux)
+		read
 
 		#kill timer if any
 		#echo $currentTimerPID
