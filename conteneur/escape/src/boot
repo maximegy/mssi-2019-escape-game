@@ -110,7 +110,8 @@ function demarage_poste()
 		e_warning2 "launching cronlauncher ..."
 			sleep 0.5
 			bash -c "xfce4-terminal --minimize --geometry +950+300 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CRONLAUNCHER\" -x $ESCAPE_SRC/cronlauncher" & 
-		export escape_boot=true
+		escape_boot=true
+		export $escape_boot
 	fi
 	$ESCAPE_SRC/m_principal
 	
