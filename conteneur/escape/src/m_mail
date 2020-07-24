@@ -110,14 +110,20 @@ function affichageMail_reception()
 	sleep 1
 	if [ $numero == "1" ]; then
 		eog $ESCAPE_RES/img/mail/reception/m1/journal/19_journal_2_2_2.png &
-		echo "3;19_Journal_2.2.2;$ESCAPE_RES/img/journaux/19_journal_2_2_2/19_journal_2_2_2.png" >> /tmp/journaux
+		if [ "$journal222" != "true" ]; then
+			echo "3;19_Journal_2.2.2;$ESCAPE_RES/img/journaux/19_journal_2_2_2/19_journal_2_2_2.png" >> /tmp/journaux
+			export journal222=true
+		fi
 	fi
 	echo "==========================================="
 	echo
 	user_wait_input "Appuyez sur une touche pour revenir au menu precedent"; if is_confirmed; then menu_reception; fi
 	if [ $numero == "2" ]; then
 		eog $ESCAPE_RES/img/mail/reception/m2/journal/19_journal_2_3.png &
-		echo "4;19_Journal_2.3;$ESCAPE_RES/img/journaux/19_journal_2_3/19_journal_2_3.png" >> /tmp/journaux
+		if [ "$journal23" != "true" ]; then
+			echo "4;19_Journal_2.3;$ESCAPE_RES/img/journaux/19_journal_2_3/19_journal_2_3.png" >> /tmp/journaux
+			export journal23=true
+		fi
 	fi
 	menu_reception
 }
@@ -139,7 +145,10 @@ function affichageMail_envois()
 		eog $nomFichier &
 		sleep 1
 		eog $ESCAPE_RES/img/mail/envoi/journal/19_journal_2_2_1.png &
-		echo "2;19_Journal_2.2.1;$ESCAPE_RES/img/journaux/19_journal_2_2_1/19_journal_2_2_1.png" >> /tmp/journaux
+		if [ "$journal221" != "true" ]; then
+			echo "2;19_Journal_2.2.1;$ESCAPE_RES/img/journaux/19_journal_2_2_1/19_journal_2_2_1.png" >> /tmp/journaux
+			export journal221=true
+		fi		
 	fi
 
 	#cat $nomFichier

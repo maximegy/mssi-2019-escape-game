@@ -121,7 +121,10 @@ function motDePasse()
 			eog $ESCAPE_RES/img/connexion_distance/xp/sortie/email_client_info.png & 
 			sleep 1
 			eog $ESCAPE_RES/img/connexion_distance/xp/sortie/39_journal_7.jpg &
-			echo "7;39_Journal_7;$ESCAPE_RES/img/journaux/39_journal_7/39_journal_7.jpg" >> /tmp/journaux
+			if [ "$journal7" != "true" ]; then
+				echo "7;39_Journal_7;$ESCAPE_RES/img/journaux/39_journal_7/39_journal_7.jpg" >> /tmp/journaux
+				export journal7=true
+			fi
 			eog $ESCAPE_RES/img/win/mail_transaction.png &
 			sleep 1
 			eog $ESCAPE_RES/img/win/transaction.png &
@@ -144,8 +147,10 @@ function motDePasse()
 			user_wait_input "Appuyez sur [ENTREE] pour continuer"
 			echo "- Affichage journal #3_2"
 			eog $ESCAPE_RES/img/connexion_distance/caviar/journal/21_journal_3_2.jpg & 
-			echo "5;21_Journal_3.2;$ESCAPE_RES/img/journaux/21_journal_3_2/21_journal_3_2.png" >> /tmp/journaux
-
+			if [ "$journal32" != "true" ]; then
+				echo "5;21_Journal_3.2;$ESCAPE_RES/img/journaux/21_journal_3_2/21_journal_3_2.png" >> /tmp/journaux
+				export journal32=true
+			fi
 			user_wait_input "Appuyez sur [ENTREE] pour continuer ..."
 
 			sleep 0.2
@@ -191,7 +196,10 @@ function motDePasse()
 			eog $ESCAPE_RES/img/connexion_distance/bourgeau/sortie/31_photo_mariage_2.png &
 			sleep 1
 			eog $ESCAPE_RES/img/connexion_distance/bourgeau/sortie/30_journal_5.png &
-			echo "6;30_Journal_5;$ESCAPE_RES/img/journaux/30_journal_5/30_journal_5.png" >> /tmp/journaux
+			if [ "$journal5" != "true" ]; then
+				echo "6;30_Journal_5;$ESCAPE_RES/img/journaux/30_journal_5/30_journal_5.png" >> /tmp/journaux
+				export journal5=true
+			fi
 			menu_connexiond
 		fi
 
