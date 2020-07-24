@@ -12,11 +12,11 @@
 
 resize -s 10 40
 
-srcDir=/home/mserment/Documents/mdnotes/perso/escape/scripts/src
-#srcDir=/home/kali/escape/src
+#srcDir=/home/mserment/Documents/mdnotes/perso/escape/scripts/src
+srcDir=/home/kali/escape/src
 
-export ESCAPE_UTIL=/home/mserment/Documents/mdnotes/perso/escape/scripts/res/escape_f_utils
-#export ESCAPE_UTIL=/home/kali/escape/res/escape_f_utils
+#export ESCAPE_UTIL=/home/mserment/Documents/mdnotes/perso/escape/scripts/res/escape_f_utils
+export ESCAPE_UTIL=/home/kali/escape/res/escape_f_utils
 source $ESCAPE_UTIL
 
 while true
