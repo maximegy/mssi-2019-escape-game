@@ -39,8 +39,8 @@ function menu_mail()
 {
 	clear
 	e_header "BOITE MAIL"
-	echo "1: Boite de reception"
-	echo "2: Boite d'envois"
+	echo "1: Boite d'envois"
+	echo "2: Boite de reception"
 	echo
 	echo "q: Quitter cet ecran et revenir au precedent"
 	echo "======================================"
@@ -48,9 +48,9 @@ function menu_mail()
 	read choix
 	
 	if [ "$choix" == "1" ] ; then
-		menu_reception
-	elif [ "$choix" == "2" ] ; then
 		menu_envois
+	elif [ "$choix" == "2" ] ; then
+		menu_reception
 	elif [ "$choix" == "q" ] ; then
 		$ESCAPE_SRC/m_principal
 	else
