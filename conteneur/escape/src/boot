@@ -32,84 +32,86 @@ function init()
 # Simulation de démarage de poste
 function demarage_poste()
 {	
-	clear
-	echo "Appuyer sur [ ${bold}$(e_flash "ENTRER") ] pour initialiser la session ..."
-	read   
-	i=1	
-	for i in {0..10}
-	do 
-		echo "."
-	       	i=$i+1
-		sleep $ESCAPE_SLEEPTIME_S
-      	done
-	clear
+	if [ "$escape_boot" != "true" ]; then
+		clear
+		echo "Appuyer sur [ ${bold}$(e_flash "ENTRER") ] pour initialiser la session ..."
+		read   
+		i=1	
+		for i in {0..10}
+		do 
+			echo "."
+				i=$i+1
+			sleep $ESCAPE_SLEEPTIME_S
+			done
+		clear
 
-	#echo "Bonjour "$hackerName
-	#echo
-	#sleep $ESCAPE_SLEEPTIME_M
-	echo "Demarrage de la session [${bold}$(e_flash "En cours")]"
-	echo
-	sleep $ESCAPE_SLEEPTIME_M
+		#echo "Bonjour "$hackerName
+		#echo
+		#sleep $ESCAPE_SLEEPTIME_M
+		echo "Demarrage de la session [${bold}$(e_flash "En cours")]"
+		echo
+		sleep $ESCAPE_SLEEPTIME_M
 
-	#chargement &
-	#PID=$(echo $!)
-	#echo $PID
-	#kill $PID
-	
-	# Simule un lancement de process
-	while read line
-    do
+		#chargement &
+		#PID=$(echo $!)
+		#echo $PID
+		#kill $PID
+		
+		# Simule un lancement de process
+		while read line
+		do
 
-		# Affichage de ligne en rouge de temps en temps 
-		randomRed=$(echo $RANDOM |cut -c1-2) # nombres de 1 a 99
-		if [ "$randomRed" -le "10" ]; then  # RED
-    		echo -$(e_warning $(date +%H%M%S))- [$(echo $RANDOM |cut -c1-3)-$(echo $RANDOM |cut -c1-3)] $(e_error $line)
-		elif [ "$randomRed" -le "15" ]; then # ORANGE
-    		echo -$(e_warning $(date +%H%M%S))- [$(echo $RANDOM |cut -c1-3)-$(echo $RANDOM |cut -c1-3)] $(e_warning $line)
-		else 							     # CLASSIC / GREEN ?
-    		echo -$(e_warning $(date +%H%M%S))- [$(echo $RANDOM |cut -c1-3)-$(echo $RANDOM |cut -c1-3)] $(e_success $line)
+			# Affichage de ligne en rouge de temps en temps 
+			randomRed=$(echo $RANDOM |cut -c1-2) # nombres de 1 a 99
+			if [ "$randomRed" -le "10" ]; then  # RED
+				echo -$(e_warning $(date +%H%M%S))- [$(echo $RANDOM |cut -c1-3)-$(echo $RANDOM |cut -c1-3)] $(e_error $line)
+			elif [ "$randomRed" -le "15" ]; then # ORANGE
+				echo -$(e_warning $(date +%H%M%S))- [$(echo $RANDOM |cut -c1-3)-$(echo $RANDOM |cut -c1-3)] $(e_warning $line)
+			else 							     # CLASSIC / GREEN ?
+				echo -$(e_warning $(date +%H%M%S))- [$(echo $RANDOM |cut -c1-3)-$(echo $RANDOM |cut -c1-3)] $(e_success $line)
+			fi
+			sleep 0.05
+		done < $ESCAPE_RES/$fichierBoot
+
+		echo
+		echo "Demarrage de la session [${bold}$(e_success "OK")]"
+		echo "Detection de l'utilisateur $hackerName [${bold}$(e_error "FAILED")]"
+		sleep 3
+		timer=$(read_settings timer)
+		echo
+		echo "#################################################################"
+		echo ""
+		echo "                        __ ATTENTION __                         "
+		echo "                                                                "
+		echo "                   VOUS N'ETES PAS ${bold}$hackerName${reset}                 "
+		echo "                TOUS LES FICHIERS SERONT ${bold}$(e_flash "SUPPRIMES")              "
+		echo "                       DANS $timer Minutes                       "
+		echo
+		echo "#################################################################"
+
+		user_wait_input "Appuyez sur [ENTREE] pour continuer"; if is_confirmed; then menu_connexiond; fi 
+		echo "Affichage du menu ..."
+		sleep $ESCAPE_SLEEPTIME_M
+
+
+		# Lancement du Timer 
+		timerScript=`/bin/ps -fu $USER| grep "timer" | grep -v "grep" | awk '{print $2}'`
+		if [ "$timerScript" == "" ]; then 
+			bash -c "xfce4-terminal --geometry +1400+20 --hide-menubar --hide-toolbar --hide-scrollbar --title=TIMER -x $ESCAPE_SRC/timer" & 
 		fi
-		sleep 0.05
-    done < $ESCAPE_RES/$fichierBoot
+		
+		# Lancement du Chat 
+		chatScript=`/bin/ps -fu $USER| grep "chat" | grep -v "grep" | awk '{print $2}'`
+		if [ "$chatScript" == "" ]; then
+			bash -c "xfce4-terminal --geometry 83x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
+		fi
 
-	echo
-	echo "Demarrage de la session [${bold}$(e_success "OK")]"
-	echo "Detection de l'utilisateur $hackerName [${bold}$(e_error "FAILED")]"
-	sleep 3
-	timer=$(read_settings timer)
-	echo
-    echo "#################################################################"
-	echo ""
-    echo "                        __ ATTENTION __                         "
-    echo "                                                                "
-    echo "                   VOUS N'ETES PAS ${bold}$hackerName${reset}                 "
-    echo "                TOUS LES FICHIERS SERONT ${bold}$(e_flash "SUPPRIMES")              "
-    echo "                       DANS $timer Minutes                       "
-    echo
-    echo "#################################################################"
-
-	user_wait_input "Appuyez sur [ENTREE] pour continuer"; if is_confirmed; then menu_connexiond; fi 
-	echo "Affichage du menu ..."
-	sleep $ESCAPE_SLEEPTIME_M
-
-
-	# Lancement du Timer 
-	timerScript=`/bin/ps -fu $USER| grep "timer" | grep -v "grep" | awk '{print $2}'`
-	if [ "$timerScript" == "" ]; then 
-		bash -c "xfce4-terminal --geometry +1400+20 --hide-menubar --hide-toolbar --hide-scrollbar --title=TIMER -x $ESCAPE_SRC/timer" & 
+		# Lancement du CronLauncher
+		e_warning2 "launching cronlauncher ..."
+			sleep 0.5
+			bash -c "xfce4-terminal --minimize --geometry +950+300 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CRONLAUNCHER\" -x $ESCAPE_SRC/cronlauncher" & 
+		export escape_boot=true
 	fi
-	
-	# Lancement du Chat 
-	chatScript=`/bin/ps -fu $USER| grep "chat" | grep -v "grep" | awk '{print $2}'`
-	if [ "$chatScript" == "" ]; then
-		bash -c "xfce4-terminal --geometry 83x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
-	fi
-
-	# Lancement du CronLauncher
-	e_warning2 "launching cronlauncher ..."
-		sleep 0.5
-		bash -c "xfce4-terminal --minimize --geometry +950+300 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CRONLAUNCHER\" -x $ESCAPE_SRC/cronlauncher" & 
-
 	$ESCAPE_SRC/m_principal
 	
 }
