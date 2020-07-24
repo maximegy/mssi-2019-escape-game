@@ -35,7 +35,7 @@ function menu_journal()
 	for line in $(sort /tmp/journaux); do
 		number=$(echo $line | awk -F ";" '{ print $1}')
 		name=$(echo $line | awk -F ";" '{ print $2}')
-		echo "$($number  -  $name)"
+		echo "$number  -  $name"
 	done
 	echo "================================="
 	echo
