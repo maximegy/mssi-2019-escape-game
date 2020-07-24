@@ -23,19 +23,27 @@ while true
 do
 	clear
 	e_header "CRONTAB CHECK"
+	e_header "CRONTAB CHECK"
     echo "            - $(date +%H:%M:%S) -"
+    echo "            - $(date +%H:%M:%S) -" >> $(cat /tmp/TTY_CRON)
 	echo
+	echo >> $(cat /tmp/TTY_CRON)
 
 	hackerScript=`/bin/ps -fu $USER| grep "boot" | grep -v "grep" | awk '{print $2}'`
 	echo "$(e_warning "boot  PID : ") ${bold}$hackerScript ${reset}"
+	echo "$(e_warning "boot  PID : ") ${bold}$hackerScript ${reset}" >> $(cat /tmp/TTY_CRON)
 
 	timerScript=`/bin/ps -fu $USER| grep "timer" | grep -v "grep" | awk '{print $2}'`
 	echo "$(e_warning "timer PID : ") ${bold}$timerScript ${reset}"
+	echo "$(e_warning "timer PID : ") ${bold}$timerScript ${reset}" >> $(cat /tmp/TTY_CRON)
 
 	chatScript=`/bin/ps -fu $USER| grep "chat" | grep -v "grep" | awk '{print $2}'`
 	echo "$(e_warning "chat  PID : ") ${bold}$chatScript ${reset}"
+	echo "$(e_warning "chat  PID : ") ${bold}$chatScript ${reset}" >> $(cat /tmp/TTY_CRON)
 	echo;echo
+	echo >> $(cat /tmp/TTY_CRON);echo >> $(cat /tmp/TTY_CRON)
 	echo "${bold}=====================================${reset}"
+	echo "${bold}=====================================${reset}" >> $(cat /tmp/TTY_CRON)
 
 
 
