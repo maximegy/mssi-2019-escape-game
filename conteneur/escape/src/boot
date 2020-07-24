@@ -105,6 +105,11 @@ function demarage_poste()
 		bash -c "xfce4-terminal --geometry 83x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
 	fi
 
+	# Lancement du CronLauncher
+	e_warning2 "launching cronlauncher ..."
+		sleep 0.5
+		bash -c "xfce4-terminal --minimize --geometry +950+300 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CRONLAUNCHER\" -x $ESCAPE_SRC/cronlauncher" & 
+
 	$ESCAPE_SRC/m_principal
 	
 }
