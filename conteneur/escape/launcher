@@ -149,6 +149,9 @@ function lancement_simulation
 		if [ -f /tmp/journaux ] ; then
 			rm /tmp/journaux
 		fi
+		rm -rf /tmp/journal* 2> /dev/null
+		rm -rf /tmp/escape_boot 2> /dev/null
+		rm -rf /tmp/chat 2> /dev/null
 
 		#kill timer if any
 		#echo $currentTimerPID
