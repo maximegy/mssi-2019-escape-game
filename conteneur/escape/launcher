@@ -97,7 +97,7 @@ function menu_admin()
 	elif [ "$choix" == "C" ] ; then
 		e_warning2 "launching cronlauncher ..."
 		sleep 0.5
-		bash -c "xfce4-terminal --geometry +950+300 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CRONLAUNCHER\" -x $ESCAPE_SRC/cronlauncher" & 
+		bash -c "xfce4-terminal --minimize --geometry +950+300 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CRONLAUNCHER\" -x $ESCAPE_SRC/cronlauncher" & 
 		menu_admin
 
 	elif [ "$choix" == "Q" ] ; then
