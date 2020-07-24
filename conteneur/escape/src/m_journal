@@ -26,9 +26,9 @@ function menu_journal()
 	listeJournaux=/tmp/journaux
 	echo
 	if [ ! -f $listeJournaux ]; then
-		echo  -e "Aucune Entrée de journal n'a été débloquée"
+		echo  -e "Aucune Entree de journal n'a ete debloquee"
 		echo
-		echo "Appuyer sur [ Entrer ] pour revenir au menu précédent"
+		echo "Appuyer sur [ Entrer ] pour revenir au menu precedent"
 		read
 		$ESCAPE_SRC/m_principal
 	fi
