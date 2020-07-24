@@ -31,7 +31,8 @@ function init()
 
 # Simulation de démarage de poste
 function demarage_poste()
-{	
+{
+	escape_boot=$(cat /tmp/escape_boot)
 	if [ "$escape_boot" != "true" ]; then
 		clear
 		echo "Appuyer sur [ ${bold}$(e_flash "ENTRER") ] pour initialiser la session ..."
@@ -110,8 +111,7 @@ function demarage_poste()
 		e_warning2 "launching cronlauncher ..."
 			sleep 0.5
 			bash -c "xfce4-terminal --minimize --geometry +950+300 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CRONLAUNCHER\" -x $ESCAPE_SRC/cronlauncher" & 
-		escape_boot=true
-		export $escape_boot
+		echo "true" >> /tmp/escape_boot
 	fi
 	$ESCAPE_SRC/m_principal
 	
