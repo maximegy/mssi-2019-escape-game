@@ -23,7 +23,20 @@ function menu_journal()
 {
 	clear
 	e_header "JOURNAUX"
-	cat $listeJournaux
+	listeJournaux=/tmp/journaux
+	echo
+	if [ ! -f $listeJournaux ]; then
+		echo  -e "Aucune Entrée de journal n'a été débloquée"
+		echo
+		echo "Appuyer sur [ Entrer ] pour revenir au menu précédent"
+		read
+		$ESCAPE_SRC/m_principal
+	fi
+	for line in $(sort /tmp/journaux); do
+		number=$(echo $line | awk -F ";" '{ print $1}')
+		name=$(echo $line | awk -F ";" '{ print $2}')
+		echo "$($number  -  $name)"
+	done
 	echo "================================="
 	echo
 	echo "q: Quitter cet ecran et revenir au precedent"
@@ -31,20 +44,20 @@ function menu_journal()
 	echo -n "Faites un choix : "
 	read choix
 	
-	if [ "$choix" == "1" ] ; then
-		affichagePage 1
-	elif [ "$choix" == "2" ] ; then
-		affichagePage 2
-	elif [ "$choix" == "3" ] ; then
-		affichagePage 3
-	elif [ "$choix" == "4" ] ; then
-		affichagePage 4
-	elif [ "$choix" == "5" ] ; then
-		affichagePage 4
-	
-	elif [ "$choix" == "q" ] ; then
-		$ESCAPE_SRC/m_principal
 
+	for line in $(sort /tmp/journaux); do
+		number=$(echo $line | awk -F ";" '{ print $1}')
+		name=$(echo $line | awk -F ";" '{ print $2}')
+		path=$(echo $line | awk -F ";" '{ print $3}')
+		if [ "$number" == "$choix" ]; then
+			echo "$(Affichage de $name)"
+			eog $path &
+			menu_journal
+		fi
+	done
+
+	if [ "$choix" == "q"]; then
+		$ESCAPE_SRC/m_principal
 	else
 		echo
 		echo -n $(e_warning "Veuillez selectionner un des choix du menu. [chiffre de 1 a 5]")
