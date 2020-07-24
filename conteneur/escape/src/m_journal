@@ -56,7 +56,7 @@ function menu_journal()
 		fi
 	done
 
-	if [ "$choix" == "q"]; then
+	if [ "$choix" == "q" ]; then
 		$ESCAPE_SRC/m_principal
 	else
 		echo
