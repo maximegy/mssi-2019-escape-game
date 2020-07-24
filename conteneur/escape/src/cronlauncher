@@ -57,14 +57,14 @@ do
 	if [ -e $timerScript ]; then 
 		#lancement du timer 
 		#bash -c "gnome-terminal -- $srcDir/timer" & 
-		pkill boot
+		pkill timer
 		bash -c "xfce4-terminal --geometry +1400+20 --hide-menubar --hide-toolbar --hide-scrollbar --title=TIMER -x $ESCAPE_SRC/timer" & 
 	fi
 
 	if [ -e $chatScript ]; then 
-		#lancement du timer 
+		#lancement du chat 
 		#bash -c "gnome-terminal -- $srcDir/timer" & 
-		pkill boot
+		pkill chat
 		bash -c "xfce4-terminal --geometry 60x30+1400+550 --hide-menubar --hide-toolbar --hide-scrollbar --title=\"CHAT / AIDE\" -x $ESCAPE_SRC/chat" & 
 	fi
 	sleep 1
