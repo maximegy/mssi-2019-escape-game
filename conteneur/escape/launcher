@@ -145,12 +145,9 @@ function lancement_simulation
 		fi
 
 		#reset journeaux
-		echo $(ls -l /tmp/journaux)
 		if [ -f /tmp/journaux ] ; then
 			rm /tmp/journaux
 		fi
-		echo $(ls -l /tmp/journaux)
-		read
 
 		#kill timer if any
 		#echo $currentTimerPID
