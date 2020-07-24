@@ -24,9 +24,10 @@ function menu_maltego
 	eog $ESCAPE_RES/img/maltego/extract_maltego.png & 
 	sleep 0.5
 	eog $ESCAPE_RES/img/maltego/journal/19_journal_2_1.png &
+	journal21=$(cat /tmp/journal21)
 	if [ "$journal21" != "true" ]; then
 		echo "1;19_Journal_2.1;$ESCAPE_RES/img/journaux/19_journal_2_1/19_journal_2_1.png" >> /tmp/journaux
-		export journal21=true
+		echo "true" > /tmp/journal21
 	fi
 	
 	sleep 0.5
